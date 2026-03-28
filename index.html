@@ -14,7 +14,7 @@
         /* --- STRUCTURE DOUBLE COUCHE --- */
         .site-container { position: relative; width: 100vw; height: 100vh; overflow-y: auto; overflow-x: hidden; }
         
-        /* MAN Layer avec le nouveau bleu #00BDF3 */
+        /* MAN Layer */
         .layer-man { background-color: #00BDF3; color: #ffffff; z-index: 1; }
         
         .layer-girl { 
@@ -37,9 +37,20 @@
             background: white;
             color: #000000;
         }
-        .bundle-card.selected-man { background: #00BDF3 !important; color: white !important; border-color: white; }
-        .bundle-card.selected-girl { background: #F4C2C2 !important; color: white !important; border-color: #F4C2C2; }
-        .bundle-card p.opacity-50 { color: inherit; opacity: 0.7; }
+        
+        /* Custom Selection Dot */
+        .selection-dot {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        /* Logic for selection states */
+        .bundle-card.selected-man .selection-dot { background: #00BDF3; border-color: #00BDF3; box-shadow: 0 0 10px rgba(0, 189, 243, 0.5); }
+        .bundle-card.selected-girl .selection-dot { background: #F4C2C2; border-color: #F4C2C2; box-shadow: 0 0 10px rgba(244, 194, 194, 0.5); }
 
         /* --- 3D PRODUCT VIEW --- */
         .product-stage-container { background: white; border-radius: 40px; padding: 40px 0 20px 0; margin-bottom: 40px; color: #000000; }
@@ -57,19 +68,21 @@
         .layer-girl .usage-section { color: #000000; }
         .section-title { font-family: 'Questrial', sans-serif; letter-spacing: 8px; margin-bottom: 50px; }
         .usage-grid { display: flex; gap: 30px; max-width: 1100px; margin: 0 auto; justify-content: center; }
+        
+        /* Steps containers: White background, Black text */
         .usage-card { 
             padding: 40px 30px; 
             border-radius: 20px; 
             flex: 1; 
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.05);
+            color: black;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .layer-girl .usage-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.05); color: #000000; }
 
-        .step-num { font-size: 40px; font-weight: bold; opacity: 0.4; display: block; margin-bottom: 10px; }
-        .usage-card h4 { font-family: 'Questrial', sans-serif; letter-spacing: 2px; margin-bottom: 15px; }
-        .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.9; }
+        .step-num { font-size: 40px; font-weight: bold; opacity: 0.2; display: block; margin-bottom: 10px; color: black; }
+        .usage-card h4 { font-family: 'Questrial', sans-serif; letter-spacing: 2px; margin-bottom: 15px; font-weight: bold; }
+        .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.8; }
 
         .trust-section { padding: 50px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: white; margin-top: 60px; color: #000000; }
         .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
@@ -81,15 +94,9 @@
         .star-rating { display: flex; gap: 5px; cursor: pointer; transition: all 0.3s; position: relative; }
         .star { font-size: 32px; color: rgba(255,255,255,0.2); transition: all 0.3s; position: relative; z-index: 2; }
         .layer-girl .star { color: rgba(0,0,0,0.1); }
-        
         .star.hovered, .star.selected { color: #FFD700 !important; }
         
-        /* Effet Prestige Ajusté (plus sobre) */
-        .prestige-mode .star {
-            color: #FFD700 !important;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
-        }
-        
+        .prestige-mode .star { color: #FFD700 !important; text-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
         .gold-glow {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 120%; height: 120%; background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%);
@@ -123,7 +130,7 @@
         
         <section class="layer-man min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10 text-white">THAT MAN</h2>
+                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-20 text-white pt-10">THAT MAN</h2>
                 
                 <div class="product-stage-container">
                     <div class="product-stage">
@@ -141,16 +148,16 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-4 mb-10">
-                    <div onclick="selectBundle(this, 'man')" class="bundle-card p-8 rounded-3xl flex items-center gap-4 selected-man">
-                        <span class="text-3xl">📦</span>
-                        <div><p class="font-bold">Alpha Bundle</p><p class="text-xs opacity-50">Save 20% on the duo</p></div>
+                    <div onclick="selectBundle(this, 'man')" class="bundle-card p-8 rounded-3xl flex items-center gap-6 selected-man">
+                        <span class="selection-dot"></span>
+                        <div><p class="font-bold uppercase tracking-widest text-sm">GET BOTH SAVE 20%</p><p class="text-xs opacity-50">One-time purchase</p></div>
                     </div>
-                    <div onclick="selectBundle(this, 'man')" class="bundle-card p-8 rounded-3xl flex items-center gap-4">
-                        <span class="text-3xl">🔄</span>
-                        <div><p class="font-bold">Monthly Protocol</p><p class="text-xs opacity-50">Save 30% • Auto-ship</p></div>
+                    <div onclick="selectBundle(this, 'man')" class="bundle-card p-8 rounded-3xl flex items-center gap-6">
+                        <span class="selection-dot"></span>
+                        <div><p class="font-bold uppercase tracking-widest text-sm">SUBSCRIBE GET 30%</p><p class="text-xs opacity-50">Cancel anytime</p></div>
                     </div>
                 </div>
-                <button class="w-full bg-white text-[#00BDF3] py-6 rounded-full font-bold text-xl mb-20">GET STARTED — $49</button>
+                <button class="w-full bg-white text-black py-6 rounded-full font-bold text-xl mb-20 tracking-widest">ORDER NOW — $49</button>
 
                 <div class="trust-section">
                     <div class="trust-grid">
@@ -196,7 +203,7 @@
                         <div class="flex flex-wrap justify-center gap-4 items-center">
                             <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border-none text-sm w-48 bg-white/20 text-white placeholder-white/60">
                             <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white/20 text-white placeholder-white/60">
-                            <button class="bg-white text-[#00BDF3] px-8 py-3 rounded-xl font-bold">SEND</button>
+                            <button class="bg-white text-black px-8 py-3 rounded-xl font-bold">SEND</button>
                         </div>
                     </div>
                 </div>
@@ -216,7 +223,7 @@
 
         <section id="girl-layer" class="layer-girl min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10 text-black">THAT GIRL</h2>
+                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-20 text-black pt-10">THAT GIRL</h2>
                 
                 <div class="product-stage-container">
                     <div class="product-stage">
@@ -234,16 +241,16 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-4 mb-10">
-                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl border border-pink-100 flex items-center gap-4 selected-girl">
-                        <span class="text-3xl">✨</span>
-                        <div><p class="font-bold">Glow Bundle</p><p class="text-xs opacity-50">Save 20% on the duo</p></div>
+                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl border border-pink-100 flex items-center gap-6 selected-girl">
+                        <span class="selection-dot"></span>
+                        <div><p class="font-bold uppercase tracking-widest text-sm">GET BOTH SAVE 20%</p><p class="text-xs opacity-50">One-time purchase</p></div>
                     </div>
-                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl border border-pink-100 flex items-center gap-4">
-                        <span class="text-3xl">🔄</span>
-                        <div><p class="font-bold">Monthly Glow</p><p class="text-xs opacity-50">Save 30% • Monthly</p></div>
+                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl border border-pink-100 flex items-center gap-6">
+                        <span class="selection-dot"></span>
+                        <div><p class="font-bold uppercase tracking-widest text-sm">SUBSCRIBE GET 30%</p><p class="text-xs opacity-50">Cancel anytime</p></div>
                     </div>
                 </div>
-                <button class="w-full bg-[#F4C2C2] text-white py-6 rounded-full font-bold text-xl mb-20">START THE GLOW — $49</button>
+                <button class="w-full bg-[#F4C2C2] text-black py-6 rounded-full font-bold text-xl mb-20 tracking-widest">ORDER NOW — $49</button>
 
                 <div class="trust-section">
                     <div class="trust-grid">
@@ -289,7 +296,7 @@
                         <div class="flex flex-wrap justify-center gap-4 items-center">
                             <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border-none text-sm w-48 bg-white text-black placeholder-black/40">
                             <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white text-black placeholder-black/40">
-                            <button class="bg-[#F4C2C2] text-white px-8 py-3 rounded-xl font-bold">SEND</button>
+                            <button class="bg-[#F4C2C2] text-black px-8 py-3 rounded-xl font-bold">SEND</button>
                         </div>
                     </div>
                 </div>
