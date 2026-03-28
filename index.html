@@ -9,67 +9,65 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
     <style>
-        body, html { margin: 0; padding: 0; font-family: 'Questrial', sans-serif; overflow-x: hidden; background: #f0f4f8; }
+        body, html { margin: 0; padding: 0; font-family: 'Questrial', sans-serif; overflow-x: hidden; }
         
         /* --- STRUCTURE DOUBLE COUCHE --- */
         .site-container { position: relative; width: 100vw; height: 100vh; overflow-y: auto; overflow-x: hidden; }
         
-        /* La couche de base (MAN) */
-        .layer-man { background-color: #f0f4f8; color: #002366; z-index: 1; }
+        /* La couche de base (MAN) - Fond Bleu Royal Opaque */
+        .layer-man { background-color: #002366; color: #ffffff; z-index: 1; }
         
-        /* La couche supérieure (GIRL) */
+        /* La couche supérieure (GIRL) - Fond Rose Pâle Opaque */
         .layer-girl { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #fff5f5; color: #4d3333; z-index: 2;
-            /* Le secret : clip-path crée la séparation */
             clip-path: inset(0 0 0 100%); 
-            pointer-events: none; /* Désactivé par défaut quand caché */
+            pointer-events: none;
         }
         .layer-girl.active-nav { pointer-events: auto; }
 
         /* --- THEME COLORS --- */
         .blue-brand { color: #002366; }
         .pink-brand { color: #F4C2C2; }
-        .bg-blue { background-color: #002366; }
-        .bg-pink { background-color: #F4C2C2; }
 
         /* --- 3D PRODUCT VIEW --- */
+        /* Large container blanc pour les produits */
+        .product-stage-container { background: white; border-radius: 40px; padding: 40px 0; margin-bottom: 40px; }
         .product-stage { perspective: 1200px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; }
         .product-card { transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s; }
+        .product-card img { max-height: 400px; width: auto; }
         
-        /* Header Fixe pour les deux couches */
-        header { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(255,255,255,0.01); backdrop-filter: blur(5px); }
+        header { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+        .layer-girl header { color: #4d3333; }
         
         .btn-nav { cursor: pointer; transition: opacity 0.3s; font-weight: bold; letter-spacing: 0.1em; }
-        .star { cursor: pointer; transition: color 0.2s; }
 
         /* --- INTEGRATION STYLES NOUVELLES SECTIONS --- */
         .usage-section { padding: 80px 20px; text-align: center; }
         .section-title { font-family: 'Questrial', sans-serif; letter-spacing: 8px; margin-bottom: 50px; }
         .usage-grid { display: flex; gap: 20px; max-width: 900px; margin: 0 auto; justify-content: center; }
         .usage-card { 
-            background: rgba(255,255,255,0.05); 
             padding: 30px; 
             border-radius: 20px; 
             flex: 1; 
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        /* Spécificité pour que les cartes soient visibles sur fond clair (MAN) */
-        .layer-man .usage-card { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.05); }
         .layer-girl .usage-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.05); }
 
         .step-num { font-size: 40px; font-weight: bold; opacity: 0.2; display: block; margin-bottom: 10px; }
         .usage-card h4 { font-family: 'Questrial', sans-serif; letter-spacing: 2px; margin-bottom: 15px; }
         .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.8; }
 
-        .trust-section { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
-        .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.8; }
+        /* Bande à fond blanc pour les icones */
+        .trust-section { padding: 40px 20px; width: 100%; background: white; margin: 60px 0; }
+        .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 800px; margin: 0 auto; }
+        .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; color: #333; }
         .trust-icon { font-size: 24px; }
         .trust-text { font-family: 'Questrial', sans-serif; font-size: 10px; letter-spacing: 2px; font-weight: bold; text-align: center; }
 
-        .that-footer { padding: 100px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; border-top: 1px solid rgba(0, 0, 0, 0.1); }
-        .layer-man .that-footer { border-top-color: rgba(0, 35, 102, 0.1); }
+        .that-footer { padding: 100px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .layer-girl .that-footer { border-top-color: rgba(0, 0, 0, 0.1); }
         .footer-logo { letter-spacing: 10px; font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
         .footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 40px; flex-wrap: wrap; }
         .footer-links a { text-decoration: none; color: inherit; font-size: 11px; letter-spacing: 2px; opacity: 0.6; transition: 0.3s; }
@@ -83,7 +81,7 @@
 </head>
 <body>
 
-    <header class="py-6 text-center border-b border-gray-100/20">
+    <header class="py-6 text-center border-b border-white/10">
         <h1 class="text-5xl font-bold tracking-tighter mb-4">THAT</h1>
         <nav class="flex justify-center gap-10 text-[10px] uppercase">
             <button onclick="revealLayer('man')" class="btn-nav">THAT MAN</button>
@@ -97,9 +95,15 @@
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT MAN</h2>
                 
-                <div class="product-stage mb-10">
-                    <div id="man-hormone" class="product-card absolute z-20 w-64"><img src="hormone-man.png" class="drop-shadow-2xl"></div>
-                    <div id="man-libido" class="product-card absolute z-10 w-56 translate-x-24 opacity-40 grayscale"><img src="libido-man.png" class="drop-shadow-xl"></div>
+                <div class="product-stage-container">
+                    <div class="product-stage">
+                        <div id="man-hormone" class="product-card absolute z-20 w-72">
+                            <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F0611b1d2e8ca3751411f84770451ba858734f6f1-2048x2048.jpg&w=768&q=85" class="drop-shadow-2xl">
+                        </div>
+                        <div id="man-libido" class="product-card absolute z-10 w-64 translate-x-24 opacity-40 grayscale">
+                            <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F21369a6db2177d05ec076f4b35ca8b15407cd572-2048x2048.jpg&w=768&q=85" class="drop-shadow-xl">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex justify-center gap-8 mb-16 text-xs uppercase font-bold">
@@ -108,16 +112,16 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-4 mb-10">
-                    <div class="bg-white p-8 rounded-3xl border border-blue-100 flex items-center gap-4">
+                    <div class="bg-white text-[#002366] p-8 rounded-3xl flex items-center gap-4">
                         <span class="text-3xl">📦</span>
                         <div><p class="font-bold">Alpha Bundle</p><p class="text-xs opacity-50">Save 20% on the duo</p></div>
                     </div>
-                    <div class="bg-blue-900 text-white p-8 rounded-3xl flex items-center gap-4">
+                    <div class="bg-blue-400/20 border border-white/20 p-8 rounded-3xl flex items-center gap-4">
                         <span class="text-3xl">🔄</span>
                         <div><p class="font-bold">Monthly Protocol</p><p class="text-xs opacity-60">Save 30% • Auto-ship</p></div>
                     </div>
                 </div>
-                <button class="w-full bg-[#002366] text-white py-6 rounded-full font-bold text-xl mb-20">GET STARTED — $49</button>
+                <button class="w-full bg-white text-[#002366] py-6 rounded-full font-bold text-xl mb-20">GET STARTED — $49</button>
 
                 <div class="usage-section">
                     <h3 class="section-title">HOW TO USE</h3>
@@ -125,17 +129,17 @@
                         <div class="usage-card">
                             <span class="step-num">01</span>
                             <h4>DOSAGE</h4>
-                            <p id="text-dosage-man">Take 2 capsules daily with a glass of water, preferably with your first meal.</p>
+                            <p>Take 2 capsules daily with a glass of water, preferably with your first meal.</p>
                         </div>
                         <div class="usage-card">
                             <span class="step-num">02</span>
                             <h4>TIMING</h4>
-                            <p id="text-timing-man">Consistency is key. Take it at the same time every day to maintain hormonal balance.</p>
+                            <p>Consistency is key. Take it at the same time every day to maintain hormonal balance.</p>
                         </div>
                         <div class="usage-card">
                             <span class="step-num">03</span>
                             <h4>EXPECTATION</h4>
-                            <p id="text-expectation-man">Feel increased energy within 7 days. Full hormonal optimization typically occurs after 3-4 weeks.</p>
+                            <p>Feel increased energy within 7 days. Full hormonal optimization typically occurs after 3-4 weeks.</p>
                         </div>
                     </div>
                 </div>
@@ -149,12 +153,12 @@
                     </div>
                 </div>
 
-                <div class="text-center py-20 bg-white/50 rounded-[40px] px-4 mt-10">
-                    <p class="italic text-gray-400 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
+                <div class="text-center py-20 bg-white/10 rounded-[40px] px-4 mt-10">
+                    <p class="italic text-white/60 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
                     <div class="flex flex-wrap justify-center gap-4 items-center">
-                        <div class="text-2xl flex gap-1 text-gray-200"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                        <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white">
-                        <button class="bg-[#002366] text-white px-8 py-3 rounded-xl font-bold">SEND</button>
+                        <div class="text-2xl flex gap-1 text-white/20"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                        <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white/20 text-white placeholder-white/40">
+                        <button class="bg-white text-[#002366] px-8 py-3 rounded-xl font-bold">SEND</button>
                     </div>
                 </div>
 
@@ -175,9 +179,15 @@
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT GIRL</h2>
                 
-                <div class="product-stage mb-10">
-                    <div id="girl-hormone" class="product-card absolute z-20 w-64"><img src="hormone-girl.png" class="drop-shadow-2xl"></div>
-                    <div id="girl-libido" class="product-card absolute z-10 w-56 translate-x-24 opacity-40 grayscale"><img src="libido-girl.png" class="drop-shadow-xl"></div>
+                <div class="product-stage-container">
+                    <div class="product-stage">
+                        <div id="girl-hormone" class="product-card absolute z-20 w-72">
+                            <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2Fc13b71d743c6b5e41dfd77c420f99bfa749175f2-2048x2048.jpg&w=768&q=85" class="drop-shadow-2xl">
+                        </div>
+                        <div id="girl-libido" class="product-card absolute z-10 w-64 translate-x-24 opacity-40 grayscale">
+                            <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F16755a58bb21e33f0c331fe57cf6b9f8f5c87807-2048x2048.jpg&w=768&q=85" class="drop-shadow-xl">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex justify-center gap-8 mb-16 text-xs uppercase font-bold">
@@ -197,33 +207,33 @@
                 </div>
                 <button class="w-full bg-[#F4C2C2] text-gray-800 py-6 rounded-full font-bold text-xl mb-20">START THE GLOW — $49</button>
 
-                <div class="trust-section">
-                    <div class="trust-grid">
-                        <div class="trust-item"><div class="trust-icon">🇺🇸</div><span class="trust-text">MADE IN USA</span></div>
-                        <div class="trust-item"><div class="trust-icon">🌿</div><span class="trust-text">100% NATURAL</span></div>
-                        <div class="trust-item"><div class="trust-icon">⚡</div><span class="trust-text">FAST SHIPPING</span></div>
-                        <div class="trust-item"><div class="trust-icon">🛡️</div><span class="trust-text">LAB TESTED</span></div>
-                    </div>
-                </div>
-                
                 <div class="usage-section">
                     <h3 class="section-title">HOW TO USE</h3>
                     <div class="usage-grid">
                         <div class="usage-card">
                             <span class="step-num">01</span>
                             <h4>DOSAGE</h4>
-                            <p id="text-dosage-girl">Take 2 capsules daily with a glass of water, preferably with your first meal.</p>
+                            <p>Take 2 capsules daily with a glass of water, preferably with your first meal.</p>
                         </div>
                         <div class="usage-card">
                             <span class="step-num">02</span>
                             <h4>TIMING</h4>
-                            <p id="text-timing-girl">Consistency is key. Take it at the same time every day to maintain hormonal balance.</p>
+                            <p>Consistency is key. Take it at the same time every day to maintain hormonal balance.</p>
                         </div>
                         <div class="usage-card">
                             <span class="step-num">03</span>
                             <h4>EXPECTATION</h4>
-                            <p id="text-expectation-girl">Feel increased energy within 7 days. Full hormonal optimization typically occurs after 3-4 weeks.</p>
+                            <p>Feel increased energy within 7 days. Full hormonal optimization typically occurs after 3-4 weeks.</p>
                         </div>
+                    </div>
+                </div>
+
+                <div class="trust-section">
+                    <div class="trust-grid">
+                        <div class="trust-item"><div class="trust-icon">🇺🇸</div><span class="trust-text">MADE IN USA</span></div>
+                        <div class="trust-item"><div class="trust-icon">🌿</div><span class="trust-text">100% NATURAL</span></div>
+                        <div class="trust-item"><div class="trust-icon">⚡</div><span class="trust-text">FAST SHIPPING</span></div>
+                        <div class="trust-item"><div class="trust-icon">🛡️</div><span class="trust-text">LAB TESTED</span></div>
                     </div>
                 </div>
 
