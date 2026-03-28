@@ -9,17 +9,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
     <style>
-        body, html { margin: 0; padding: 0; font-family: 'Questrial', sans-serif; overflow-x: hidden; }
+        body, html { margin: 0; padding: 0; font-family: 'Questrial', sans-serif; overflow-x: hidden; background-color: white; }
         
         /* --- STRUCTURE DOUBLE COUCHE --- */
         .site-container { position: relative; width: 100vw; height: 100vh; overflow-y: auto; overflow-x: hidden; }
         
         /* MAN Layer */
-        .layer-man { background-color: #00BDF3; color: #ffffff; z-index: 1; }
+        .layer-man { background-color: white; color: #00BDF3; z-index: 1; }
         
         .layer-girl { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #fff5f5; color: #000000; z-index: 2;
+            background-color: white; color: #F4C2C2; z-index: 2;
             clip-path: inset(0 0 0 100%); 
             pointer-events: none;
         }
@@ -33,10 +33,12 @@
         .bundle-card { 
             cursor: pointer; 
             transition: all 0.3s ease; 
-            border: 2px solid transparent;
+            border: 1px solid rgba(0,0,0,0.1);
             background: white;
             color: #000000;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.1); /* Effet 3D léger */
         }
+        .bundle-card:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0px rgba(0,0,0,0.1); }
         
         /* Custom Selection Dot */
         .selection-dot {
@@ -53,47 +55,47 @@
         .bundle-card.selected-girl .selection-dot { background: #F4C2C2; border-color: #F4C2C2; box-shadow: 0 0 10px rgba(244, 194, 194, 0.5); }
 
         /* --- 3D PRODUCT VIEW --- */
-        .product-stage-container { background: white; border-radius: 40px; padding: 40px 0 20px 0; margin-bottom: 40px; color: #000000; }
+        .product-stage-container { background: #f9f9f9; border-radius: 40px; padding: 40px 0 20px 0; margin-bottom: 40px; color: #000000; }
         .product-stage { perspective: 1200px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; }
         .product-card { transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s; }
         .product-card img { max-height: 400px; width: auto; }
         
-        header { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white; }
-        .layer-girl header { color: #000000; }
+        header { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); color: #000000; }
         
         .btn-nav { cursor: pointer; transition: opacity 0.3s; font-weight: bold; letter-spacing: 0.1em; }
 
         /* --- SECTIONS --- */
-        .usage-section { padding: 80px 20px; text-align: center; color: white; }
-        .layer-girl .usage-section { color: #000000; }
+        .usage-section { padding: 80px 20px; text-align: center; }
         .section-title { font-family: 'Questrial', sans-serif; letter-spacing: 8px; margin-bottom: 50px; }
         .usage-grid { display: flex; gap: 30px; max-width: 1100px; margin: 0 auto; justify-content: center; }
         
-        /* Steps containers: White background, Black text */
+        /* Steps containers: Theme colored background, White text */
         .usage-card { 
             padding: 40px 30px; 
             border-radius: 20px; 
             flex: 1; 
-            background: white;
-            border: 1px solid rgba(0,0,0,0.05);
-            color: black;
+            color: white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
+        .layer-man .usage-card { background: #00BDF3; }
+        .layer-girl .usage-card { background: #F4C2C2; }
 
-        .step-num { font-size: 40px; font-weight: bold; opacity: 0.2; display: block; margin-bottom: 10px; color: black; }
+        .step-num { font-size: 40px; font-weight: bold; opacity: 0.4; display: block; margin-bottom: 10px; color: white; }
         .usage-card h4 { font-family: 'Questrial', sans-serif; letter-spacing: 2px; margin-bottom: 15px; font-weight: bold; }
-        .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.8; }
+        .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.9; }
 
-        .trust-section { padding: 50px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: white; margin-top: 60px; color: #000000; }
+        .trust-section { padding: 50px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: 60px; color: white; }
+        .layer-man .trust-section { background: #00BDF3; }
+        .layer-girl .trust-section { background: #F4C2C2; }
+        
         .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
         .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .trust-icon { font-size: 32px; }
+        .trust-icon { font-size: 32px; filter: brightness(0) invert(1); } /* Force icons to white if needed */
         .trust-text { font-family: 'Questrial', sans-serif; font-size: 10px; letter-spacing: 2px; font-weight: bold; text-align: center; }
 
         /* --- REVIEW SYSTEM --- */
         .star-rating { display: flex; gap: 5px; cursor: pointer; transition: all 0.3s; position: relative; }
-        .star { font-size: 32px; color: rgba(255,255,255,0.2); transition: all 0.3s; position: relative; z-index: 2; }
-        .layer-girl .star { color: rgba(0,0,0,0.1); }
+        .star { font-size: 32px; color: rgba(0,0,0,0.1); transition: all 0.3s; position: relative; z-index: 2; }
         .star.hovered, .star.selected { color: #FFD700 !important; }
         
         .prestige-mode .star { color: #FFD700 !important; text-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
@@ -104,8 +106,7 @@
         }
         .prestige-mode .gold-glow { opacity: 1; }
 
-        .that-footer { padding: 100px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; border-top: 1px solid rgba(255, 255, 255, 0.1); color: white; }
-        .layer-girl .that-footer { border-top-color: rgba(0, 0, 0, 0.1); color: #000000; }
+        .that-footer { padding: 100px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; border-top: 1px solid rgba(0, 0, 0, 0.05); color: #000000; }
         .footer-logo { letter-spacing: 10px; font-size: 18px; margin-bottom: 30px; }
         .footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 40px; flex-wrap: wrap; }
         .footer-links a { text-decoration: none; color: inherit; font-size: 11px; letter-spacing: 2px; opacity: 0.7; transition: 0.3s; }
@@ -113,12 +114,16 @@
         .fda-disclaimer { max-width: 600px; margin: 0 auto 30px; font-size: 10px; line-height: 1.6; opacity: 0.6; font-style: italic; }
         .copyright { font-size: 9px; letter-spacing: 1px; opacity: 0.5; }
 
-        @media (max-width: 768px) { .usage-grid { flex-direction: column; } .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; } }
+        @media (max-width: 768px) { 
+            .usage-grid { flex-direction: column; } 
+            .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .hero-title { font-size: 50px !important; letter-spacing: 2px !important; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="py-6 text-center border-b border-white/10">
+    <header class="py-6 text-center border-b border-black/5">
         <h1 class="text-5xl font-bold tracking-tighter mb-4">THAT</h1>
         <nav class="flex justify-center gap-10 text-[10px] uppercase">
             <button onclick="revealLayer('man')" class="btn-nav">THAT MAN</button>
@@ -130,7 +135,7 @@
         
         <section class="layer-man min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-20 text-white pt-10">THAT MAN</h2>
+                <h2 class="hero-title text-[80px] font-black opacity-10 text-center leading-none mb-16 text-[#00BDF3] pt-10 uppercase tracking-widest whitespace-nowrap">THAT MAN</h2>
                 
                 <div class="product-stage-container">
                     <div class="product-stage">
@@ -142,7 +147,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold text-black">
-                        <button onclick="rotate('man', 'hormone')" id="m-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
+                        <button onclick="rotate('man', 'hormone')" id="m-btn-h" class="border-b-2 border-[#00BDF3] pb-1">Hormones</button>
                         <button onclick="rotate('man', 'libido')" id="m-btn-l" class="opacity-30 pb-1">Libido</button>
                     </div>
                 </div>
@@ -157,7 +162,7 @@
                         <div><p class="font-bold uppercase tracking-widest text-sm">SUBSCRIBE GET 30%</p><p class="text-xs opacity-50">Cancel anytime</p></div>
                     </div>
                 </div>
-                <button class="w-full bg-white text-black py-6 rounded-full font-bold text-xl mb-20 tracking-widest">ORDER NOW — $49</button>
+                <button class="w-full bg-[#00BDF3] text-white py-6 rounded-full font-bold text-xl mb-20 tracking-widest hover:brightness-105 transition-all">ORDER NOW — $49</button>
 
                 <div class="trust-section">
                     <div class="trust-grid">
@@ -169,7 +174,7 @@
                 </div>
 
                 <div class="usage-section">
-                    <h3 class="section-title">HOW TO USE</h3>
+                    <h3 class="section-title text-[#00BDF3]">HOW TO USE</h3>
                     <div class="usage-grid">
                         <div class="usage-card">
                             <span class="step-num">01</span>
@@ -189,8 +194,8 @@
                     </div>
                 </div>
 
-                <div class="text-center py-20 bg-white/10 rounded-[40px] px-4 mt-10">
-                    <p class="italic text-white mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
+                <div class="text-center py-20 bg-gray-50 rounded-[40px] px-4 mt-10">
+                    <p class="italic text-gray-600 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
                     <div class="flex flex-col items-center gap-6">
                         <div class="star-rating" id="stars-man">
                             <div class="gold-glow"></div>
@@ -201,9 +206,9 @@
                             <span class="star" data-value="5">★</span>
                         </div>
                         <div class="flex flex-wrap justify-center gap-4 items-center">
-                            <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border-none text-sm w-48 bg-white/20 text-white placeholder-white/60">
-                            <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white/20 text-white placeholder-white/60">
-                            <button class="bg-white text-black px-8 py-3 rounded-xl font-bold">SEND</button>
+                            <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border border-gray-200 text-sm w-48 bg-white text-black">
+                            <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border border-gray-200 text-sm w-64 bg-white text-black">
+                            <button class="bg-[#00BDF3] text-white px-8 py-3 rounded-xl font-bold">SEND</button>
                         </div>
                     </div>
                 </div>
@@ -223,7 +228,7 @@
 
         <section id="girl-layer" class="layer-girl min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-20 text-black pt-10">THAT GIRL</h2>
+                <h2 class="hero-title text-[80px] font-black opacity-10 text-center leading-none mb-16 text-[#F4C2C2] pt-10 uppercase tracking-widest whitespace-nowrap">THAT GIRL</h2>
                 
                 <div class="product-stage-container">
                     <div class="product-stage">
@@ -235,22 +240,22 @@
                         </div>
                     </div>
                     <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold text-black">
-                        <button onclick="rotate('girl', 'hormone')" id="g-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
+                        <button onclick="rotate('girl', 'hormone')" id="g-btn-h" class="border-b-2 border-[#F4C2C2] pb-1">Hormones</button>
                         <button onclick="rotate('girl', 'libido')" id="g-btn-l" class="opacity-30 pb-1">Libido</button>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4 mb-10">
-                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl border border-pink-100 flex items-center gap-6 selected-girl">
+                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl flex items-center gap-6 selected-girl">
                         <span class="selection-dot"></span>
                         <div><p class="font-bold uppercase tracking-widest text-sm">GET BOTH SAVE 20%</p><p class="text-xs opacity-50">One-time purchase</p></div>
                     </div>
-                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl border border-pink-100 flex items-center gap-6">
+                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl flex items-center gap-6">
                         <span class="selection-dot"></span>
                         <div><p class="font-bold uppercase tracking-widest text-sm">SUBSCRIBE GET 30%</p><p class="text-xs opacity-50">Cancel anytime</p></div>
                     </div>
                 </div>
-                <button class="w-full bg-[#F4C2C2] text-black py-6 rounded-full font-bold text-xl mb-20 tracking-widest">ORDER NOW — $49</button>
+                <button class="w-full bg-[#F4C2C2] text-white py-6 rounded-full font-bold text-xl mb-20 tracking-widest hover:brightness-105 transition-all">ORDER NOW — $49</button>
 
                 <div class="trust-section">
                     <div class="trust-grid">
@@ -262,7 +267,7 @@
                 </div>
 
                 <div class="usage-section">
-                    <h3 class="section-title">HOW TO USE</h3>
+                    <h3 class="section-title text-[#F4C2C2]">HOW TO USE</h3>
                     <div class="usage-grid">
                         <div class="usage-card">
                             <span class="step-num">01</span>
@@ -282,8 +287,8 @@
                     </div>
                 </div>
 
-                <div class="text-center py-20 bg-white/50 rounded-[40px] px-4 mt-10">
-                    <p class="italic text-black mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
+                <div class="text-center py-20 bg-gray-50 rounded-[40px] px-4 mt-10">
+                    <p class="italic text-gray-600 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
                     <div class="flex flex-col items-center gap-6">
                         <div class="star-rating" id="stars-girl">
                             <div class="gold-glow"></div>
@@ -294,9 +299,9 @@
                             <span class="star" data-value="5">★</span>
                         </div>
                         <div class="flex flex-wrap justify-center gap-4 items-center">
-                            <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border-none text-sm w-48 bg-white text-black placeholder-black/40">
-                            <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white text-black placeholder-black/40">
-                            <button class="bg-[#F4C2C2] text-black px-8 py-3 rounded-xl font-bold">SEND</button>
+                            <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border border-gray-200 text-sm w-48 bg-white text-black">
+                            <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border border-gray-200 text-sm w-64 bg-white text-black">
+                            <button class="bg-[#F4C2C2] text-white px-8 py-3 rounded-xl font-bold">SEND</button>
                         </div>
                     </div>
                 </div>
@@ -334,16 +339,17 @@
             const l = document.getElementById(isMan ? 'man-libido' : 'girl-libido');
             const btnH = document.getElementById(isMan ? 'm-btn-h' : 'g-btn-h');
             const btnL = document.getElementById(isMan ? 'm-btn-l' : 'g-btn-l');
+            const themeColor = isMan ? '#00BDF3' : '#F4C2C2';
 
             if (product === 'libido') {
                 gsap.to(l, { x: 0, scale: 1.1, opacity: 1, zIndex: 30, grayscale: 0, duration: 0.8 });
                 gsap.to(h, { x: 100, scale: 0.8, opacity: 0.4, zIndex: 10, grayscale: 1, duration: 0.8 });
-                btnL.style.opacity = "1"; btnL.style.borderBottom = "2px solid currentcolor";
+                btnL.style.opacity = "1"; btnL.style.borderBottom = `2px solid ${themeColor}`;
                 btnH.style.opacity = "0.3"; btnH.style.borderBottom = "2px solid transparent";
             } else {
                 gsap.to(h, { x: 0, scale: 1.1, opacity: 1, zIndex: 30, grayscale: 0, duration: 0.8 });
                 gsap.to(l, { x: 100, scale: 0.8, opacity: 0.4, zIndex: 10, grayscale: 1, duration: 0.8 });
-                btnH.style.opacity = "1"; btnH.style.borderBottom = "2px solid currentcolor";
+                btnH.style.opacity = "1"; btnH.style.borderBottom = `2px solid ${themeColor}`;
                 btnL.style.opacity = "0.3"; btnL.style.borderBottom = "2px solid transparent";
             }
         }
