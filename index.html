@@ -15,22 +15,22 @@
         .site-container { position: relative; width: 100vw; height: 100vh; overflow-y: auto; overflow-x: hidden; }
         
         /* MAN Layer */
-        .layer-man { background-color: white; color: #00BDF3; z-index: 1; }
+        .layer-man { background-color: white; color: #3F88FE; z-index: 1; }
         
         /* Header Font Style */
         .header-logo { font-family: 'Questrial', sans-serif; letter-spacing: 0.15em; transition: letter-spacing 0.3s ease; }
 
         .layer-girl { 
             position: absolute; top: 0; left: 0; width: 100%; min-height: 100%;
-            background-color: white; color: #F4C2C2; z-index: 2;
+            background-color: white; color: #FFB3C1; z-index: 2;
             clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%); 
             pointer-events: none;
         }
         .layer-girl.active-nav { pointer-events: auto; }
 
         /* --- THEME COLORS --- */
-        .blue-brand { color: #00BDF3; }
-        .pink-brand { color: #F4C2C2; }
+        .blue-brand { color: #3F88FE; }
+        .pink-brand { color: #FFB3C1; }
 
         /* --- BUNDLE SELECTION --- */
         .bundle-card { 
@@ -52,8 +52,8 @@
             transition: all 0.3s ease;
         }
 
-        .bundle-card.selected-man .selection-dot { background: #00BDF3; border-color: #00BDF3; box-shadow: 0 0 10px rgba(0, 189, 243, 0.5); }
-        .bundle-card.selected-girl .selection-dot { background: #F4C2C2; border-color: #F4C2C2; box-shadow: 0 0 10px rgba(244, 194, 194, 0.5); }
+        .bundle-card.selected-man .selection-dot { background: #3F88FE; border-color: #3F88FE; box-shadow: 0 0 10px rgba(63, 136, 254, 0.5); }
+        .bundle-card.selected-girl .selection-dot { background: #FFB3C1; border-color: #FFB3C1; box-shadow: 0 0 10px rgba(255, 179, 193, 0.5); }
 
         /* --- 3D PRODUCT VIEW --- */
         .product-stage-container { background: #f9f9f9; border-radius: 40px; padding: 40px 0 20px 0; margin-bottom: 40px; color: #000000; }
@@ -79,16 +79,16 @@
             color: white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .layer-man .usage-card { background: #00BDF3; }
-        .layer-girl .usage-card { background: #F4C2C2; }
+        .layer-man .usage-card { background: #3F88FE; }
+        .layer-girl .usage-card { background: #FFB3C1; }
 
         .step-num { font-size: 40px; font-weight: bold; opacity: 0.4; display: block; margin-bottom: 10px; color: white; }
         .usage-card h4 { font-family: 'Questrial', sans-serif; letter-spacing: 2px; margin-bottom: 15px; font-weight: bold; }
         .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.9; }
 
         .trust-section { padding: 50px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: 60px; color: white; }
-        .layer-man .trust-section { background: #00BDF3; }
-        .layer-girl .trust-section { background: #F4C2C2; }
+        .layer-man .trust-section { background: #3F88FE; }
+        .layer-girl .trust-section { background: #FFB3C1; }
         
         .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
         .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
@@ -160,7 +160,7 @@
         
         <section class="layer-man min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="hero-title text-[80px] font-black opacity-10 text-center leading-none mb-16 text-[#00BDF3] pt-10 uppercase tracking-widest whitespace-nowrap" data-t="hero_man">THAT MAN</h2>
+                <h2 class="hero-title text-[80px] font-black opacity-10 text-center leading-none mb-16 text-[#3F88FE] pt-10 uppercase tracking-widest whitespace-nowrap" data-t="hero_man">THAT MAN</h2>
                 
                 <div class="product-stage-container">
                     <div class="product-stage">
@@ -172,7 +172,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold text-black">
-                        <button onclick="rotate('man', 'hormone')" id="m-btn-h" class="border-b-2 border-[#00BDF3] pb-1" data-t="prod_hormone">Hormones</button>
+                        <button onclick="rotate('man', 'hormone')" id="m-btn-h" class="border-b-2 border-[#3F88FE] pb-1" data-t="prod_hormone">Hormones</button>
                         <button onclick="rotate('man', 'libido')" id="m-btn-l" class="opacity-30 pb-1" data-t="prod_libido">Libido</button>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                         <div><p class="font-bold uppercase tracking-widest text-sm" data-t="bundle_2">SUBSCRIBE GET 30%</p><p class="text-xs opacity-50" data-t="purchase_type_2">Cancel anytime</p></div>
                     </div>
                 </div>
-                <button class="w-full bg-[#00BDF3] text-white py-6 rounded-full font-bold text-xl mb-20 tracking-widest hover:brightness-105 transition-all"><span data-t="order_now">ORDER NOW</span> — $49</button>
+                <button class="w-full bg-[#3F88FE] text-white py-6 rounded-full font-bold text-xl mb-20 tracking-widest hover:brightness-105 transition-all"><span data-t="order_now">ORDER NOW</span> — $49</button>
 
                 <div class="trust-section">
                     <div class="trust-grid">
@@ -199,7 +199,7 @@
                 </div>
 
                 <div class="usage-section">
-                    <h3 class="section-title text-[#00BDF3]" data-t="usage_title">HOW TO USE</h3>
+                    <h3 class="section-title text-[#3F88FE]" data-t="usage_title">HOW TO USE</h3>
                     <div class="usage-grid">
                         <div class="usage-card">
                             <span class="step-num">01</span>
@@ -230,9 +230,9 @@
                                 <span class="star" data-value="4">★</span>
                                 <span class="star" data-value="5">★</span>
                             </div>
-                            <input type="text" data-placeholder="input_name" placeholder="Your first name..." class="p-4 rounded-xl border border-gray-200 text-sm w-full md:w-40 bg-white text-black focus:outline-none focus:border-[#00BDF3]">
-                            <input type="text" data-placeholder="input_thoughts" placeholder="Your thoughts..." class="p-4 rounded-xl border border-gray-200 text-sm w-full md:flex-1 bg-white text-black focus:outline-none focus:border-[#00BDF3]">
-                            <button class="bg-[#00BDF3] text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all" data-t="send">SEND</button>
+                            <input type="text" data-placeholder="input_name" placeholder="Your first name..." class="p-4 rounded-xl border border-gray-200 text-sm w-full md:w-40 bg-white text-black focus:outline-none focus:border-[#3F88FE]">
+                            <input type="text" data-placeholder="input_thoughts" placeholder="Your thoughts..." class="p-4 rounded-xl border border-gray-200 text-sm w-full md:flex-1 bg-white text-black focus:outline-none focus:border-[#3F88FE]">
+                            <button class="bg-[#3F88FE] text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all" data-t="send">SEND</button>
                         </div>
                     </div>
                 </div>
@@ -252,7 +252,7 @@
 
         <section id="girl-layer" class="layer-girl min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="hero-title text-[80px] font-black opacity-10 text-center leading-none mb-16 text-[#F4C2C2] pt-10 uppercase tracking-widest whitespace-nowrap" data-t="hero_girl">THAT GIRL</h2>
+                <h2 class="hero-title text-[80px] font-black opacity-10 text-center leading-none mb-16 text-[#FFB3C1] pt-10 uppercase tracking-widest whitespace-nowrap" data-t="hero_girl">THAT GIRL</h2>
                 
                 <div class="product-stage-container">
                     <div class="product-stage">
@@ -264,7 +264,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold text-black">
-                        <button onclick="rotate('girl', 'hormone')" id="g-btn-h" class="border-b-2 border-[#F4C2C2] pb-1" data-t="prod_hormone">Hormones</button>
+                        <button onclick="rotate('girl', 'hormone')" id="g-btn-h" class="border-b-2 border-[#FFB3C1] pb-1" data-t="prod_hormone">Hormones</button>
                         <button onclick="rotate('girl', 'libido')" id="g-btn-l" class="opacity-30 pb-1" data-t="prod_libido">Libido</button>
                     </div>
                 </div>
@@ -279,7 +279,7 @@
                         <div><p class="font-bold uppercase tracking-widest text-sm" data-t="bundle_2">SUBSCRIBE GET 30%</p><p class="text-xs opacity-50" data-t="purchase_type_2">Cancel anytime</p></div>
                     </div>
                 </div>
-                <button class="w-full bg-[#F4C2C2] text-white py-6 rounded-full font-bold text-xl mb-20 tracking-widest hover:brightness-105 transition-all"><span data-t="order_now">ORDER NOW</span> — $49</button>
+                <button class="w-full bg-[#FFB3C1] text-white py-6 rounded-full font-bold text-xl mb-20 tracking-widest hover:brightness-105 transition-all"><span data-t="order_now">ORDER NOW</span> — $49</button>
 
                 <div class="trust-section">
                     <div class="trust-grid">
@@ -291,7 +291,7 @@
                 </div>
 
                 <div class="usage-section">
-                    <h3 class="section-title text-[#F4C2C2]" data-t="usage_title">HOW TO USE</h3>
+                    <h3 class="section-title text-[#FFB3C1]" data-t="usage_title">HOW TO USE</h3>
                     <div class="usage-grid">
                         <div class="usage-card">
                             <span class="step-num">01</span>
@@ -322,9 +322,9 @@
                                 <span class="star" data-value="4">★</span>
                                 <span class="star" data-value="5">★</span>
                             </div>
-                            <input type="text" data-placeholder="input_name" placeholder="Your first name..." class="p-4 rounded-xl border border-gray-200 text-sm w-full md:w-40 bg-white text-black focus:outline-none focus:border-[#F4C2C2]">
-                            <input type="text" data-placeholder="input_thoughts" placeholder="Your thoughts..." class="p-4 rounded-xl border border-gray-200 text-sm w-full md:flex-1 bg-white text-black focus:outline-none focus:border-[#F4C2C2]">
-                            <button class="bg-[#F4C2C2] text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all" data-t="send">SEND</button>
+                            <input type="text" data-placeholder="input_name" placeholder="Your first name..." class="p-4 rounded-xl border border-gray-200 text-sm w-full md:w-40 bg-white text-black focus:outline-none focus:border-[#FFB3C1]">
+                            <input type="text" data-placeholder="input_thoughts" placeholder="Your thoughts..." class="p-4 rounded-xl border border-gray-200 text-sm w-full md:flex-1 bg-white text-black focus:outline-none focus:border-[#FFB3C1]">
+                            <button class="bg-[#FFB3C1] text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:brightness-110 transition-all" data-t="send">SEND</button>
                         </div>
                     </div>
                 </div>
@@ -421,7 +421,7 @@
             const l = document.getElementById(isMan ? 'man-libido' : 'girl-libido');
             const btnH = document.getElementById(isMan ? 'm-btn-h' : 'g-btn-h');
             const btnL = document.getElementById(isMan ? 'm-btn-l' : 'g-btn-l');
-            const themeColor = isMan ? '#00BDF3' : '#F4C2C2';
+            const themeColor = isMan ? '#3F88FE' : '#FFB3C1';
 
             if (product === 'libido') {
                 gsap.to(l, { x: 0, scale: 1.1, opacity: 1, zIndex: 30, grayscale: 0, duration: 0.8 });
