@@ -131,6 +131,106 @@
                     <div><b class="text-2xl block mb-2">03</b><p class="text-[10px] uppercase font-bold">Total Radiance</p></div>
                 </div>
 
+                <div class="usage-section">
+    <h3 class="section-title">HOW TO USE</h3>
+    <div class="usage-grid">
+        <div class="usage-card">
+            <span class="step-num">01</span>
+            <h4>DOSAGE</h4>
+            <p id="text-dosage">Take 2 capsules daily with a glass of water, preferably with your first meal.</p>
+        </div>
+        <div class="usage-card">
+            <span class="step-num">02</span>
+            <h4>TIMING</h4>
+            <p id="text-timing">Consistency is key. Take it at the same time every day to maintain hormonal balance.</p>
+        </div>
+        <div class="usage-card">
+            <span class="step-num">03</span>
+            <h4>EXPECTATION</h4>
+            <p id="text-expectation">Feel increased energy within 7 days. Full hormonal optimization typically occurs after 3-4 weeks.</p>
+        </div>
+    </div>
+</div>
+
+<div class="trust-section">
+    <div class="trust-grid">
+        <div class="trust-item">
+            <div class="trust-icon">🇺🇸</div>
+            <span class="trust-text">MADE IN USA</span>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon">🌿</div>
+            <span class="trust-text">100% NATURAL</span>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon">⚡</div>
+            <span class="trust-text">FAST SHIPPING</span>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon">🛡️</div>
+            <span class="trust-text">LAB TESTED</span>
+        </div>
+    </div>
+</div>
+
+<style>
+.trust-section {
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.8;
+}
+
+.trust-icon {
+    font-size: 24px;
+}
+
+.trust-text {
+    font-family: 'Questrial', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Adaptabilité Mobile */
+@media (max-width: 600px) {
+    .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+}
+</style>
+
+<style>
+.usage-section { padding: 80px 20px; text-align: center; }
+.section-title { font-family: 'Questrial', sans-serif; letter-spacing: 8px; margin-bottom: 50px; }
+.usage-grid { display: flex; gap: 20px; max-width: 900px; margin: 0 auto; justify-content: center; }
+.usage-card { 
+    background: rgba(255,255,255,0.05); 
+    padding: 30px; 
+    border-radius: 20px; 
+    flex: 1; 
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.theme-girl .usage-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.05); }
+.step-num { font-size: 40px; font-weight: bold; opacity: 0.2; display: block; margin-bottom: 10px; }
+.usage-card h4 { font-family: 'Questrial', sans-serif; letter-spacing: 2px; margin-bottom: 15px; }
+.usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.8; }
+
+@media (max-width: 768px) { .usage-grid { flex-direction: column; } }
+</style>
+
                 <div class="text-center py-20 bg-white/50 rounded-[40px] px-4">
                     <p class="italic text-gray-500 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
                     <div class="flex flex-wrap justify-center gap-4 items-center">
