@@ -21,9 +21,9 @@
         .header-logo { font-family: 'Questrial', sans-serif; letter-spacing: 0.15em; transition: letter-spacing 0.3s ease; }
 
         .layer-girl { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; min-height: 100%;
             background-color: white; color: #F4C2C2; z-index: 2;
-            clip-path: inset(0 0 0 100%); 
+            clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%); 
             pointer-events: none;
         }
         .layer-girl.active-nav { pointer-events: auto; }
@@ -113,7 +113,6 @@
         }
         .star.hovered, .star.selected { color: #FFD700 !important; }
         
-        /* New Independent Glow Effect */
         .prestige-mode .star { 
             filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
             transform: scale(1.1);
@@ -157,7 +156,7 @@
         </div>
     </header>
 
-    <div class="site-container">
+    <div class="site-container" id="main-scroll-container">
         
         <section class="layer-man min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
@@ -390,15 +389,30 @@
             });
         }
 
+        // --- WAVE SWITCH LOGIC ---
         function revealLayer(target) {
             const girlLayer = document.getElementById('girl-layer');
-            if (target === 'girl') {
-                gsap.to(girlLayer, { clipPath: "inset(0 0 0 0%)", duration: 1.2, ease: "power3.inOut" });
-                girlLayer.classList.add('active-nav');
-            } else {
-                gsap.to(girlLayer, { clipPath: "inset(0 0 0 100%)", duration: 1.2, ease: "power3.inOut" });
-                girlLayer.classList.remove('active-nav');
-            }
+            const waveData = { p: target === 'girl' ? 100 : 0 };
+            
+            gsap.to(waveData, {
+                p: target === 'girl' ? 0 : 100,
+                duration: 1.4,
+                ease: "power2.inOut",
+                onUpdate: () => {
+                    const p = waveData.p;
+                    // Calcule la vague basée sur la progression p
+                    const offset = Math.sin(p * 0.1) * 5; 
+                    const path = `polygon(${p + offset}% 0%, 100% 0%, 100% 100%, ${p - offset}% 100%)`;
+                    girlLayer.style.clipPath = path;
+                },
+                onComplete: () => {
+                    if (target === 'girl') {
+                        girlLayer.classList.add('active-nav');
+                    } else {
+                        girlLayer.classList.remove('active-nav');
+                    }
+                }
+            });
         }
 
         function rotate(gender, product) {
