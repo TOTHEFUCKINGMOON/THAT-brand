@@ -14,33 +14,47 @@
         /* --- STRUCTURE DOUBLE COUCHE --- */
         .site-container { position: relative; width: 100vw; height: 100vh; overflow-y: auto; overflow-x: hidden; }
         
-        .layer-man { background-color: #002366; color: #ffffff; z-index: 1; }
+        /* MAN Layer avec le nouveau bleu #00BDF3 */
+        .layer-man { background-color: #00BDF3; color: #ffffff; z-index: 1; }
         
         .layer-girl { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #fff5f5; color: #4d3333; z-index: 2;
+            background-color: #fff5f5; color: #000000; z-index: 2;
             clip-path: inset(0 0 0 100%); 
             pointer-events: none;
         }
         .layer-girl.active-nav { pointer-events: auto; }
 
         /* --- THEME COLORS --- */
-        .blue-brand { color: #002366; }
+        .blue-brand { color: #00BDF3; }
         .pink-brand { color: #F4C2C2; }
 
+        /* --- BUNDLE SELECTION --- */
+        .bundle-card { 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            border: 2px solid transparent;
+            background: white;
+            color: #000000;
+        }
+        .bundle-card.selected-man { background: #00BDF3 !important; color: white !important; border-color: white; }
+        .bundle-card.selected-girl { background: #F4C2C2 !important; color: white !important; border-color: #F4C2C2; }
+        .bundle-card p.opacity-50 { color: inherit; opacity: 0.7; }
+
         /* --- 3D PRODUCT VIEW --- */
-        .product-stage-container { background: white; border-radius: 40px; padding: 40px 0 20px 0; margin-bottom: 40px; }
+        .product-stage-container { background: white; border-radius: 40px; padding: 40px 0 20px 0; margin-bottom: 40px; color: #000000; }
         .product-stage { perspective: 1200px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; }
         .product-card { transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s; }
         .product-card img { max-height: 400px; width: auto; }
         
-        header { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .layer-girl header { color: #4d3333; }
+        header { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white; }
+        .layer-girl header { color: #000000; }
         
         .btn-nav { cursor: pointer; transition: opacity 0.3s; font-weight: bold; letter-spacing: 0.1em; }
 
         /* --- SECTIONS --- */
-        .usage-section { padding: 80px 20px; text-align: center; }
+        .usage-section { padding: 80px 20px; text-align: center; color: white; }
+        .layer-girl .usage-section { color: #000000; }
         .section-title { font-family: 'Questrial', sans-serif; letter-spacing: 8px; margin-bottom: 50px; }
         .usage-grid { display: flex; gap: 30px; max-width: 1100px; margin: 0 auto; justify-content: center; }
         .usage-card { 
@@ -49,16 +63,17 @@
             flex: 1; 
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
+            color: white;
         }
-        .layer-girl .usage-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.05); }
+        .layer-girl .usage-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.05); color: #000000; }
 
-        .step-num { font-size: 40px; font-weight: bold; opacity: 0.2; display: block; margin-bottom: 10px; }
+        .step-num { font-size: 40px; font-weight: bold; opacity: 0.4; display: block; margin-bottom: 10px; }
         .usage-card h4 { font-family: 'Questrial', sans-serif; letter-spacing: 2px; margin-bottom: 15px; }
-        .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.8; }
+        .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.9; }
 
-        .trust-section { padding: 50px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: white; margin-top: 60px; }
+        .trust-section { padding: 50px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: white; margin-top: 60px; color: #000000; }
         .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
-        .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; color: #333; }
+        .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .trust-icon { font-size: 32px; }
         .trust-text { font-family: 'Questrial', sans-serif; font-size: 10px; letter-spacing: 2px; font-weight: bold; text-align: center; }
 
@@ -69,33 +84,27 @@
         
         .star.hovered, .star.selected { color: #FFD700 !important; }
         
-        /* Effet Prestige 5 étoiles */
+        /* Effet Prestige Ajusté (plus sobre) */
         .prestige-mode .star {
             color: #FFD700 !important;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-            animation: starPulse 1.5s infinite alternate;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
         }
         
         .gold-glow {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 150%; height: 150%; background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+            width: 120%; height: 120%; background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, transparent 70%);
             opacity: 0; transition: opacity 0.5s; z-index: 1; pointer-events: none;
         }
         .prestige-mode .gold-glow { opacity: 1; }
 
-        @keyframes starPulse {
-            0% { transform: scale(1); filter: brightness(1); }
-            100% { transform: scale(1.1); filter: brightness(1.3); }
-        }
-
-        .that-footer { padding: 100px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .layer-girl .that-footer { border-top-color: rgba(0, 0, 0, 0.1); }
-        .footer-logo { letter-spacing: 10px; font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
+        .that-footer { padding: 100px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; border-top: 1px solid rgba(255, 255, 255, 0.1); color: white; }
+        .layer-girl .that-footer { border-top-color: rgba(0, 0, 0, 0.1); color: #000000; }
+        .footer-logo { letter-spacing: 10px; font-size: 18px; margin-bottom: 30px; }
         .footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 40px; flex-wrap: wrap; }
-        .footer-links a { text-decoration: none; color: inherit; font-size: 11px; letter-spacing: 2px; opacity: 0.6; transition: 0.3s; }
+        .footer-links a { text-decoration: none; color: inherit; font-size: 11px; letter-spacing: 2px; opacity: 0.7; transition: 0.3s; }
         .footer-links a:hover { opacity: 1; }
-        .fda-disclaimer { max-width: 600px; margin: 0 auto 30px; font-size: 10px; line-height: 1.6; opacity: 0.4; font-style: italic; }
-        .copyright { font-size: 9px; letter-spacing: 1px; opacity: 0.3; }
+        .fda-disclaimer { max-width: 600px; margin: 0 auto 30px; font-size: 10px; line-height: 1.6; opacity: 0.6; font-style: italic; }
+        .copyright { font-size: 9px; letter-spacing: 1px; opacity: 0.5; }
 
         @media (max-width: 768px) { .usage-grid { flex-direction: column; } .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; } }
     </style>
@@ -114,9 +123,9 @@
         
         <section class="layer-man min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT MAN</h2>
+                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10 text-white">THAT MAN</h2>
                 
-                <div class="product-stage-container text-[#002366]">
+                <div class="product-stage-container">
                     <div class="product-stage">
                         <div id="man-hormone" class="product-card absolute z-20 w-72">
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F0611b1d2e8ca3751411f84770451ba858734f6f1-2048x2048.jpg&w=768&q=85" class="drop-shadow-2xl">
@@ -125,23 +134,23 @@
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F21369a6db2177d05ec076f4b35ca8b15407cd572-2048x2048.jpg&w=768&q=85" class="drop-shadow-xl">
                         </div>
                     </div>
-                    <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold">
+                    <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold text-black">
                         <button onclick="rotate('man', 'hormone')" id="m-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
                         <button onclick="rotate('man', 'libido')" id="m-btn-l" class="opacity-30 pb-1">Libido</button>
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-4 mb-10">
-                    <div class="bg-white text-[#002366] p-8 rounded-3xl flex items-center gap-4">
+                <div class="grid grid-cols-2 gap-4 mb-10">
+                    <div onclick="selectBundle(this, 'man')" class="bundle-card p-8 rounded-3xl flex items-center gap-4 selected-man">
                         <span class="text-3xl">📦</span>
                         <div><p class="font-bold">Alpha Bundle</p><p class="text-xs opacity-50">Save 20% on the duo</p></div>
                     </div>
-                    <div class="bg-blue-400/20 border border-white/20 p-8 rounded-3xl flex items-center gap-4">
+                    <div onclick="selectBundle(this, 'man')" class="bundle-card p-8 rounded-3xl flex items-center gap-4">
                         <span class="text-3xl">🔄</span>
-                        <div><p class="font-bold">Monthly Protocol</p><p class="text-xs opacity-60">Save 30% • Auto-ship</p></div>
+                        <div><p class="font-bold">Monthly Protocol</p><p class="text-xs opacity-50">Save 30% • Auto-ship</p></div>
                     </div>
                 </div>
-                <button class="w-full bg-white text-[#002366] py-6 rounded-full font-bold text-xl mb-20">GET STARTED — $49</button>
+                <button class="w-full bg-white text-[#00BDF3] py-6 rounded-full font-bold text-xl mb-20">GET STARTED — $49</button>
 
                 <div class="trust-section">
                     <div class="trust-grid">
@@ -174,7 +183,7 @@
                 </div>
 
                 <div class="text-center py-20 bg-white/10 rounded-[40px] px-4 mt-10">
-                    <p class="italic text-white/60 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
+                    <p class="italic text-white mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
                     <div class="flex flex-col items-center gap-6">
                         <div class="star-rating" id="stars-man">
                             <div class="gold-glow"></div>
@@ -185,9 +194,9 @@
                             <span class="star" data-value="5">★</span>
                         </div>
                         <div class="flex flex-wrap justify-center gap-4 items-center">
-                            <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border-none text-sm w-48 bg-white/20 text-white placeholder-white/40">
-                            <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white/20 text-white placeholder-white/40">
-                            <button class="bg-white text-[#002366] px-8 py-3 rounded-xl font-bold">SEND</button>
+                            <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border-none text-sm w-48 bg-white/20 text-white placeholder-white/60">
+                            <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white/20 text-white placeholder-white/60">
+                            <button class="bg-white text-[#00BDF3] px-8 py-3 rounded-xl font-bold">SEND</button>
                         </div>
                     </div>
                 </div>
@@ -207,9 +216,9 @@
 
         <section id="girl-layer" class="layer-girl min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT GIRL</h2>
+                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10 text-black">THAT GIRL</h2>
                 
-                <div class="product-stage-container text-[#4d3333]">
+                <div class="product-stage-container">
                     <div class="product-stage">
                         <div id="girl-hormone" class="product-card absolute z-20 w-72">
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2Fc13b71d743c6b5e41dfd77c420f99bfa749175f2-2048x2048.jpg&w=768&q=85" class="drop-shadow-2xl">
@@ -218,23 +227,23 @@
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F16755a58bb21e33f0c331fe57cf6b9f8f5c87807-2048x2048.jpg&w=768&q=85" class="drop-shadow-xl">
                         </div>
                     </div>
-                    <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold">
+                    <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold text-black">
                         <button onclick="rotate('girl', 'hormone')" id="g-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
                         <button onclick="rotate('girl', 'libido')" id="g-btn-l" class="opacity-30 pb-1">Libido</button>
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-4 mb-10">
-                    <div class="bg-white p-8 rounded-3xl border border-pink-100 flex items-center gap-4">
+                <div class="grid grid-cols-2 gap-4 mb-10">
+                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl border border-pink-100 flex items-center gap-4 selected-girl">
                         <span class="text-3xl">✨</span>
                         <div><p class="font-bold">Glow Bundle</p><p class="text-xs opacity-50">Save 20% on the duo</p></div>
                     </div>
-                    <div class="bg-[#F4C2C2] text-white p-8 rounded-3xl flex items-center gap-4">
+                    <div onclick="selectBundle(this, 'girl')" class="bundle-card p-8 rounded-3xl border border-pink-100 flex items-center gap-4">
                         <span class="text-3xl">🔄</span>
-                        <div><p class="font-bold">Monthly Glow</p><p class="text-xs opacity-80 text-gray-700">Save 30% • Monthly</p></div>
+                        <div><p class="font-bold">Monthly Glow</p><p class="text-xs opacity-50">Save 30% • Monthly</p></div>
                     </div>
                 </div>
-                <button class="w-full bg-[#F4C2C2] text-gray-800 py-6 rounded-full font-bold text-xl mb-20">START THE GLOW — $49</button>
+                <button class="w-full bg-[#F4C2C2] text-white py-6 rounded-full font-bold text-xl mb-20">START THE GLOW — $49</button>
 
                 <div class="trust-section">
                     <div class="trust-grid">
@@ -267,7 +276,7 @@
                 </div>
 
                 <div class="text-center py-20 bg-white/50 rounded-[40px] px-4 mt-10">
-                    <p class="italic text-gray-500 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
+                    <p class="italic text-black mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
                     <div class="flex flex-col items-center gap-6">
                         <div class="star-rating" id="stars-girl">
                             <div class="gold-glow"></div>
@@ -278,9 +287,9 @@
                             <span class="star" data-value="5">★</span>
                         </div>
                         <div class="flex flex-wrap justify-center gap-4 items-center">
-                            <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border-none text-sm w-48 bg-white">
-                            <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white">
-                            <button class="bg-[#F4C2C2] text-gray-800 px-8 py-3 rounded-xl font-bold">SEND</button>
+                            <input type="text" placeholder="Your first name..." class="p-3 rounded-xl border-none text-sm w-48 bg-white text-black placeholder-black/40">
+                            <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white text-black placeholder-black/40">
+                            <button class="bg-[#F4C2C2] text-white px-8 py-3 rounded-xl font-bold">SEND</button>
                         </div>
                     </div>
                 </div>
@@ -330,6 +339,16 @@
                 btnH.style.opacity = "1"; btnH.style.borderBottom = "2px solid currentcolor";
                 btnL.style.opacity = "0.3"; btnL.style.borderBottom = "2px solid transparent";
             }
+        }
+
+        /* Bundle Selection Logic */
+        function selectBundle(element, gender) {
+            const container = element.parentElement;
+            const selectedClass = gender === 'man' ? 'selected-man' : 'selected-girl';
+            container.querySelectorAll('.bundle-card').forEach(card => {
+                card.classList.remove(selectedClass);
+            });
+            element.classList.add(selectedClass);
         }
 
         /* Logic Review Stars */
