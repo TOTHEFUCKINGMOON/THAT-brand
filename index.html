@@ -42,6 +42,43 @@
         
         .btn-nav { cursor: pointer; transition: opacity 0.3s; font-weight: bold; letter-spacing: 0.1em; }
         .star { cursor: pointer; transition: color 0.2s; }
+
+        /* --- INTEGRATION STYLES NOUVELLES SECTIONS --- */
+        .usage-section { padding: 80px 20px; text-align: center; }
+        .section-title { font-family: 'Questrial', sans-serif; letter-spacing: 8px; margin-bottom: 50px; }
+        .usage-grid { display: flex; gap: 20px; max-width: 900px; margin: 0 auto; justify-content: center; }
+        .usage-card { 
+            background: rgba(255,255,255,0.05); 
+            padding: 30px; 
+            border-radius: 20px; 
+            flex: 1; 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        /* Spécificité pour que les cartes soient visibles sur fond clair (MAN) */
+        .layer-man .usage-card { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.05); }
+        .layer-girl .usage-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.05); }
+
+        .step-num { font-size: 40px; font-weight: bold; opacity: 0.2; display: block; margin-bottom: 10px; }
+        .usage-card h4 { font-family: 'Questrial', sans-serif; letter-spacing: 2px; margin-bottom: 15px; }
+        .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.8; }
+
+        .trust-section { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
+        .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.8; }
+        .trust-icon { font-size: 24px; }
+        .trust-text { font-family: 'Questrial', sans-serif; font-size: 10px; letter-spacing: 2px; font-weight: bold; text-align: center; }
+
+        .that-footer { padding: 100px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; border-top: 1px solid rgba(0, 0, 0, 0.1); }
+        .layer-man .that-footer { border-top-color: rgba(0, 35, 102, 0.1); }
+        .footer-logo { letter-spacing: 10px; font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
+        .footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 40px; flex-wrap: wrap; }
+        .footer-links a { text-decoration: none; color: inherit; font-size: 11px; letter-spacing: 2px; opacity: 0.6; transition: 0.3s; }
+        .footer-links a:hover { opacity: 1; }
+        .fda-disclaimer { max-width: 600px; margin: 0 auto 30px; font-size: 10px; line-height: 1.6; opacity: 0.4; font-style: italic; }
+        .copyright { font-size: 9px; letter-spacing: 1px; opacity: 0.3; }
+
+        @media (max-width: 768px) { .usage-grid { flex-direction: column; } }
+        @media (max-width: 600px) { .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; } }
     </style>
 </head>
 <body>
@@ -56,7 +93,7 @@
 
     <div class="site-container">
         
-        <section class="layer-man min-h-screen pt-32 pb-20 px-6">
+        <section class="layer-man min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT MAN</h2>
                 
@@ -82,13 +119,37 @@
                 </div>
                 <button class="w-full bg-[#002366] text-white py-6 rounded-full font-bold text-xl mb-20">GET STARTED — $49</button>
 
-                <div class="grid grid-cols-3 gap-6 text-center border-t py-12 border-blue-200/30">
-                    <div><b class="text-2xl block mb-2">01</b><p class="text-[10px] uppercase font-bold">2 capsules / AM</p></div>
-                    <div><b class="text-2xl block mb-2">02</b><p class="text-[10px] uppercase font-bold">Consistent Flow</p></div>
-                    <div><b class="text-2xl block mb-2">03</b><p class="text-[10px] uppercase font-bold">Peak Performance</p></div>
+                <div class="usage-section">
+                    <h3 class="section-title">HOW TO USE</h3>
+                    <div class="usage-grid">
+                        <div class="usage-card">
+                            <span class="step-num">01</span>
+                            <h4>DOSAGE</h4>
+                            <p id="text-dosage-man">Take 2 capsules daily with a glass of water, preferably with your first meal.</p>
+                        </div>
+                        <div class="usage-card">
+                            <span class="step-num">02</span>
+                            <h4>TIMING</h4>
+                            <p id="text-timing-man">Consistency is key. Take it at the same time every day to maintain hormonal balance.</p>
+                        </div>
+                        <div class="usage-card">
+                            <span class="step-num">03</span>
+                            <h4>EXPECTATION</h4>
+                            <p id="text-expectation-man">Feel increased energy within 7 days. Full hormonal optimization typically occurs after 3-4 weeks.</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="text-center py-20 bg-white/50 rounded-[40px] px-4">
+                <div class="trust-section">
+                    <div class="trust-grid">
+                        <div class="trust-item"><div class="trust-icon">🇺🇸</div><span class="trust-text">MADE IN USA</span></div>
+                        <div class="trust-item"><div class="trust-icon">🌿</div><span class="trust-text">100% NATURAL</span></div>
+                        <div class="trust-item"><div class="trust-icon">⚡</div><span class="trust-text">FAST SHIPPING</span></div>
+                        <div class="trust-item"><div class="trust-icon">🛡️</div><span class="trust-text">LAB TESTED</span></div>
+                    </div>
+                </div>
+
+                <div class="text-center py-20 bg-white/50 rounded-[40px] px-4 mt-10">
                     <p class="italic text-gray-400 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
                     <div class="flex flex-wrap justify-center gap-4 items-center">
                         <div class="text-2xl flex gap-1 text-gray-200"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
@@ -96,10 +157,21 @@
                         <button class="bg-[#002366] text-white px-8 py-3 rounded-xl font-bold">SEND</button>
                     </div>
                 </div>
+
+                <footer class="that-footer">
+                    <div class="footer-content">
+                        <h4 class="footer-logo">THAT BRAND</h4>
+                        <div class="footer-links">
+                            <a href="/shipping">SHIPPING</a><a href="/terms">TERMS</a><a href="/privacy">PRIVACY</a><a href="/contact">CONTACT</a>
+                        </div>
+                        <p class="fda-disclaimer">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+                        <div class="copyright">© 2026 THAT. ALL RIGHTS RESERVED.</div>
+                    </div>
+                </footer>
             </div>
         </section>
 
-        <section id="girl-layer" class="layer-girl min-h-screen pt-32 pb-20 px-6">
+        <section id="girl-layer" class="layer-girl min-h-screen pt-32 pb-0 px-6">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT GIRL</h2>
                 
@@ -125,13 +197,37 @@
                 </div>
                 <button class="w-full bg-[#F4C2C2] text-gray-800 py-6 rounded-full font-bold text-xl mb-20">START THE GLOW — $49</button>
 
-                <div class="grid grid-cols-3 gap-6 text-center border-t py-12 border-pink-200">
-                    <div><b class="text-2xl block mb-2">01</b><p class="text-[10px] uppercase font-bold">Morning Ritual</p></div>
-                    <div><b class="text-2xl block mb-2">02</b><p class="text-[10px] uppercase font-bold">Balance Flow</p></div>
-                    <div><b class="text-2xl block mb-2">03</b><p class="text-[10px] uppercase font-bold">Total Radiance</p></div>
+                <div class="usage-section">
+                    <h3 class="section-title">HOW TO USE</h3>
+                    <div class="usage-grid">
+                        <div class="usage-card">
+                            <span class="step-num">01</span>
+                            <h4>DOSAGE</h4>
+                            <p id="text-dosage-girl">Take 2 capsules daily with a glass of water, preferably with your first meal.</p>
+                        </div>
+                        <div class="usage-card">
+                            <span class="step-num">02</span>
+                            <h4>TIMING</h4>
+                            <p id="text-timing-girl">Consistency is key. Take it at the same time every day to maintain hormonal balance.</p>
+                        </div>
+                        <div class="usage-card">
+                            <span class="step-num">03</span>
+                            <h4>EXPECTATION</h4>
+                            <p id="text-expectation-girl">Feel increased energy within 7 days. Full hormonal optimization typically occurs after 3-4 weeks.</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="text-center py-20 bg-white/50 rounded-[40px] px-4">
+                <div class="trust-section">
+                    <div class="trust-grid">
+                        <div class="trust-item"><div class="trust-icon">🇺🇸</div><span class="trust-text">MADE IN USA</span></div>
+                        <div class="trust-item"><div class="trust-icon">🌿</div><span class="trust-text">100% NATURAL</span></div>
+                        <div class="trust-item"><div class="trust-icon">⚡</div><span class="trust-text">FAST SHIPPING</span></div>
+                        <div class="trust-item"><div class="trust-icon">🛡️</div><span class="trust-text">LAB TESTED</span></div>
+                    </div>
+                </div>
+
+                <div class="text-center py-20 bg-white/50 rounded-[40px] px-4 mt-10">
                     <p class="italic text-gray-500 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
                     <div class="flex flex-wrap justify-center gap-4 items-center">
                         <div class="text-2xl flex gap-1 text-gray-200"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
@@ -139,36 +235,34 @@
                         <button class="bg-[#F4C2C2] text-gray-800 px-8 py-3 rounded-xl font-bold">SEND</button>
                     </div>
                 </div>
+
+                <footer class="that-footer">
+                    <div class="footer-content">
+                        <h4 class="footer-logo">THAT BRAND</h4>
+                        <div class="footer-links">
+                            <a href="/shipping">SHIPPING</a><a href="/terms">TERMS</a><a href="/privacy">PRIVACY</a><a href="/contact">CONTACT</a>
+                        </div>
+                        <p class="fda-disclaimer">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+                        <div class="copyright">© 2026 THAT. ALL RIGHTS RESERVED.</div>
+                    </div>
+                </footer>
             </div>
         </section>
 
     </div>
 
     <script>
-        // --- LOGIQUE DU SLIDER CLIP-PATH (EFFET VAGUE) ---
         function revealLayer(target) {
             const girlLayer = document.getElementById('girl-layer');
-            
             if (target === 'girl') {
-                // On fait glisser le site GIRL par dessus (de droite à gauche)
-                gsap.to(girlLayer, {
-                    clipPath: "inset(0 0 0 0%)",
-                    duration: 1.2,
-                    ease: "power3.inOut"
-                });
+                gsap.to(girlLayer, { clipPath: "inset(0 0 0 0%)", duration: 1.2, ease: "power3.inOut" });
                 girlLayer.classList.add('active-nav');
             } else {
-                // On retire le site GIRL vers la droite pour révéler le site MAN en dessous
-                gsap.to(girlLayer, {
-                    clipPath: "inset(0 0 0 100%)",
-                    duration: 1.2,
-                    ease: "power3.inOut"
-                });
+                gsap.to(girlLayer, { clipPath: "inset(0 0 0 100%)", duration: 1.2, ease: "power3.inOut" });
                 girlLayer.classList.remove('active-nav');
             }
         }
 
-        // --- LOGIQUE ROTATION PRODUITS ---
         function rotate(gender, product) {
             const isMan = (gender === 'man');
             const h = document.getElementById(isMan ? 'man-hormone' : 'girl-hormone');
