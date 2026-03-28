@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THAT | Functional Supplements</title>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        body { font-family: 'Questrial', sans-serif; transition: background-color 0.4s ease, color 0.4s ease; overflow-x: hidden; }
+        
+        /* --- Themes --- */
+        .theme-man { background-color: #f0f4f8; color: #001a4d; }
+        .theme-man .brand-color { color: #002366; } /* Royal Blue */
+        .theme-man .bg-brand { background-color: #002366; }
+        .theme-man .border-brand { border-color: #002366; }
+        .theme-man .text-inverted { color: #f0f4f8; }
+
+        .theme-girl { background-color: #fff5f5; color: #4d3333; }
+        .theme-girl .brand-color { color: #F4C2C2; } /* Pale Pink Trendy */
+        .theme-girl .bg-brand { background-color: #F4C2C2; }
+        .theme-girl .border-brand { border-color: #F4C2C2; }
+        .theme-girl .text-inverted { color: #4d3333; } /* Pink-ish dark text on pink bg */
+
+        /* --- 3D Stage & Products --- */
+        .product-stage { perspective: 1500px; }
+        .product-card { 
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s ease, filter 0.8s ease;
+            will-change: transform, opacity;
+        }
+        
+        /* Selecteur de produit minimalist */
+        .prod-btn { transition: all 0.3s ease; opacity: 0.3; border-bottom: 2px solid transparent; }
+        .prod-btn.active { opacity: 1; border-color: currentColor; font-weight: bold; }
+
+        /* --- La Vague de transition --- */
+        #wave-overlay {
+            position: fixed; top: 0; top: 0; left: -100%; width: 100%; height: 100vh;
+            z-index: 999; pointer-events: none;
+            color: #002366; /* Couleur par défaut (Man) */
+        }
+        
+        /* Utilitaire pour masquer le contenu pendant le chargement du script */
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body class="theme-man">
+
+    <svg id="wave-overlay" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path id="wave-path" d="M0,0 C20,10 80,10 100,0 L100,100 C80,90 20,90 0,100 Z" fill="currentColor"></path>
+    </svg>
+
+    <header class="py-8 text-center border-b border-gray-100/50 relative z-10">
+        <h1 class="text-6xl font-bold tracking-tighter mb-5 brand-color">THAT</h1>
+        <nav class="flex justify-center gap-10 text-xs tracking-widest uppercase font-bold">
+            <button onclick="triggerWaveTransition('man')" class="hover:opacity-60 transition">THAT MAN</button>
+            <button onclick="triggerWaveTransition('girl')" class="hover:opacity-60 transition">THAT GIRL</button>
+        </nav>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-12 relative z-10">
+        
+        <div class="text-center mb-16 relative">
+            <h2 id="hero-title" class="text-[120px] md:text-[180px] font-black opacity-5 uppercase leading-none tracking-tighter select-none">
+                THAT MAN
+            </h2>
+        </div>
+
+        <div class="relative h-[450px] md:h-[550px] flex items-center justify-center product-stage mb-10">
+            <div id="prod-container-hormone" class="product-card absolute z-20 w-64 md:w-72 transform-style-3d">
+                <img id="img-hormone" src="https://i.imgur.com/8Y4N8y6.png" alt="Hormone Supplement" class="drop-shadow-[0_35px_35px_rgba(0,0,0,0.2)]">
+            </div>
+            <div id="prod-container-libido" class="product-card absolute z-10 w-56 md:w-64 transform-style-3d translate-x-24 translate-z-[-150px] opacity-40 grayscale-[40%]">
+                <img id="img-libido" src="https://i.imgur.com/M6X8gI1.png" alt="Libido Supplement" class="drop-shadow-[0_25px_25px_rgba(0,0,0,0.15)]">
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-12 mb-20 text-xs tracking-widest uppercase relative z-20">
+            <button id="btn-hormone" onclick="rotateProduct('hormone')" class="prod-btn active pb-1">Hormones</button>
+            <button id="btn-libido" onclick="rotateProduct('libido')" class="prod-btn pb-1">Libido</button>
+        </div>
+
+        <section class="bg-white rounded-3xl p-8 md:p-12 shadow-lg border border-gray-50 mb-20 text-gray-900">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <div class="border-2 border-dashed border-gray-200 p-6 rounded-2xl flex items-center gap-5 cursor-pointer hover:border-black transition group relative">
+                    <span class="text-4xl">📦📦</span>
+                    <div>
+                        <h3 class="font-bold text-lg">The "THAT" Performance Duo</h3>
+                        <p class="text-sm text-gray-500">Hormones + Libido • Full Cycle</p>
+                    </div>
+                    <div class="absolute top-4 right-4 bg-brand text-inverted text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Save 20%
+                    </div>
+                </div>
+                <div class="bg-gray-950 text-white p-6 rounded-2xl flex items-center gap-5 cursor-pointer hover:scale-[1.02] transition relative">
+                    <span class="text-4xl">🔄</span>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">Monthly Protocol</h3>
+                        <p class="text-sm opacity-70 text-white">Auto-delivery • Cancel anytime</p>
+                    </div>
+                    <div class="absolute top-4 right-4 bg-white brand-color text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        Save 30%
+                    </div>
+                </div>
+            </div>
+            
+            <button class="w-full bg-gray-950 text-white py-6 rounded-full font-bold text-2xl hover:bg-gray-800 transition shadow-md hover:shadow-xl transform hover:-translate-y-1">
+                START YOUR PROTOCOL — <span id="product-price">$49.00</span>
+            </button>
+            <p class="text-center text-xs text-gray-400 mt-4 uppercase tracking-widest">Free shipping on all protocols</p>
+        </section>
+
+        <section id="benefits-section" class="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 text-center border-t border-gray-100/50 mb-10">
+            <div class="benefit-item">
+                <div class="text-5xl mb-4">⚡️</div>
+                <h4 class="font-bold uppercase text-sm tracking-wider mb-1 data-title">Sustained Energy</h4>
+                <p class="text-xs opacity-70 data-desc">No crash, just flow.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="text-5xl mb-4">🧠</div>
+                <h4 class="font-bold uppercase text-sm tracking-wider mb-1 data-title">Sharp Focus</h4>
+                <p class="text-xs opacity-70 data-desc">Own your day.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="text-5xl mb-4">💪</div>
+                <h4 class="font-bold uppercase text-sm tracking-wider mb-1 data-title">Optimal Drive</h4>
+                <p class="text-xs opacity-70 data-desc">Performance amplified.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="text-5xl mb-4">🌙</div>
+                <h4 class="font-bold uppercase text-sm tracking-wider mb-1 data-title">Deep Recovery</h4>
+                <p class="text-xs opacity-70 data-desc">Wake up renewed.</p>
+            </div>
+        </section>
+
+        <section id="guide-section" class="py-20 border-t border-gray-100/50 mb-10">
+            <h3 class="text-center text-4xl font-bold tracking-tight mb-16 brand-color">Your 3-Step Protocol</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center relative">
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-100 -translate-y-1/2 z-0"></div>
+                
+                <div class="relative z-10 bg-body px-4">
+                    <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand text-inverted text-3xl font-bold mb-6 shadow-md step-num">1</span>
+                    <h4 class="text-xl font-bold mb-2 guide-title">Morning Alignment</h4>
+                    <p class="text-sm opacity-80 guide-text">Take 2 capsules of Hormones with water before your first meal.</p>
+                </div>
+                <div class="relative z-10 bg-body px-4">
+                    <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand text-inverted text-3xl font-bold mb-6 shadow-md step-num">2</span>
+                    <h4 class="text-xl font-bold mb-2 guide-title">Daily Flow</h4>
+                    <p class="text-sm opacity-80 guide-text">Take 1 capsule of Libido mid-day to maintain performance.</p>
+                </div>
+                <div class="relative z-10 bg-body px-4">
+                    <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand text-inverted text-3xl font-bold mb-6 shadow-md step-num">3</span>
+                    <h4 class="text-xl font-bold mb-2 guide-title">The Shift</h4>
+                    <p class="text-sm opacity-80 guide-text">Feel peak mental and physical optimization within 14 days.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 text-center border-t border-gray-100/50">
+            <h3 class="text-3xl font-bold mb-2">Help us make it better for you!</h3>
+            <p class="text-gray-400 italic mb-12 select-none">
+                "And don't worry, we won't publish it, so **give us no quarter**!"
+            </p>
+            
+            <form class="flex flex-wrap items-center justify-center gap-6 bg-white shadow-sm p-6 rounded-3xl border border-gray-50 text-gray-900">
+                <div class="flex gap-1.5 text-3xl cursor-pointer rating-stars">
+                    <span class="star text-gray-200 hover:text-amber-400 transition" onclick="setRating(1)">★</span>
+                    <span class="star text-gray-200 hover:text-amber-400 transition" onclick="setRating(2)">★</span>
+                    <span class="star text-gray-200 hover:text-amber-400 transition" onclick="setRating(3)">★</span>
+                    <span class="star text-gray-200 hover:text-amber-400 transition" onclick="setRating(4)">★</span>
+                    <span class="star text-gray-200 hover:text-amber-400 transition" onclick="setRating(5)">★</span>
+                </div>
+                
+                <input type="text" placeholder="Your honest thoughts..." required
+                    class="flex-grow bg-gray-50 px-6 py-4 rounded-full border-none focus:ring-2 focus:ring-gray-300 w-full md:w-auto text-sm">
+                
+                <input type="text" placeholder="First Name" 
+                    class="bg-gray-50 px-6 py-4 rounded-full border-none focus:ring-2 focus:ring-gray-300 w-full md:w-40 text-sm">
+                
+                <button type="submit" class="bg-gray-950 text-white px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-gray-800 transition w-full md:w-auto">
+                    SEND
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="py-10 text-center text-xs opacity-40 border-t border-gray-100/50 relative z-10">
+        © THAT Co. All rights reserved. Functional Protocols.
+    </footer>
+
+    <script>
+        // --- DONNÉES DYNAMIQUES POUR LE SWITCH ---
+        const themeData = {
+            man: {
+                heroTitle: "THAT MAN",
+                waveColor: "#002366", // Royal Blue
+                imgHormone: "https://i.imgur.com/8Y4N8y6.png", // Remplacer par .jpg modélisation 3D
+                imgLibido: "https://i.imgur.com/M6X8gI1.png",  // Remplacer par .jpg modélisation 3D
+                benefits: [
+                    {icon: "⚡️", title: "Sustained Energy", desc: "No crash, just flow."},
+                    {icon: "🧠", title: "Sharp Focus", desc: "Own your day."},
+                    {icon: "💪", title: "Optimal Drive", desc: "Performance amplified."},
+                    {icon: "🌙", title: "Deep Recovery", desc: "Wake up renewed."}
+                ],
+                guide: [
+                    {title: "Morning Alignment", desc: "Take 2 capsules of Hormones with water before meal."},
+                    {title: "Daily Flow", desc: "Take 1 capsule of Libido mid-day to maintain performance."},
+                    {title: "The Shift", desc: "Feel peak physical optimization within 14 days."}
+                ]
+            },
+            girl: {
+                heroTitle: "THAT GIRL",
+                waveColor: "#F4C2C2", // Pale Pink
+                imgHormone: "https://i.imgur.com/7Yf9MdB.png", // Exemple Image Femme
+                imgLibido: "https://i.imgur.com/N5M6H7V.png",  // Exemple Image Femme
+                benefits: [
+                    {icon: "✨", title: "Glow & Radiance", desc: "Skin & hair health."},
+                    {icon: "⚖️", title: "Hormonal Balance", desc: "Smooth cycles."},
+                    {icon: "🌸", title: "Mood Support", desc: "Calm confidence."},
+                    {icon: "🍃", title: "Vitality Boost", desc: "Feel light, be you."}
+                ],
+                guide: [
+                    {title: "AM Routine", desc: "Take 2 capsules of THAT GIRL Hormones with breakfast."},
+                    {title: "PM Balance", desc: "Take 1 capsule of Libido early evening."},
+                    {title: "The Glow-up", desc: "Visualize your inner balance established in 3 weeks."}
+                ]
+            }
+        };
+
+        let currentActiveProduct = 'hormone';
+
+        // --- 1. LOGIQUE ROTATION PRODUITS 3D ---
+        function rotateProduct(type) {
+            if (type === currentActiveProduct) return; // Déjà actif
+
+            const hContainer = document.getElementById('prod-container-hormone');
+            const lContainer = document.getElementById('prod-container-libido');
+            const btnH = document.getElementById('btn-hormone');
+            const btnL = document.getElementById('btn-libido');
+
+            // Mise à jour des boutons selecteurs
+            if(type === 'libido') {
+                btnH.classList.remove('active');
+                btnL.classList.add('active');
+                
+                // Libido passe devant (gros, opaque, z-index haut, centré)
+                gsap.to(lContainer, { x: 0, z: 0, opacity: 1, zIndex: 20, filter: "grayscale(0%)", duration: 1, ease: "power4.out" });
+                // Hormone passe derrière (petit, transparent, décalé droite)
+                gsap.to(hContainer, { x: 100, z: -150, opacity: 0.4, zIndex: 10, filter: "grayscale(40%)", duration: 1, ease: "power4.out" });
+                
+                currentActiveProduct = 'libido';
+            } else {
+                btnL.classList.remove('active');
+                btnH.classList.add('active');
+
+                // Hormone repasse devant
+                gsap.to(hContainer, { x: 0, z: 0, opacity: 1, zIndex: 20, filter: "grayscale(0%)", duration: 1, ease: "power4.out" });
+                // Libido repasse derrière
+                gsap.to(lContainer, { x: 100, z: -150, opacity: 0.4, zIndex: 10, filter: "grayscale(40%)", duration: 1, ease: "power4.out" });
+                
+                currentActiveProduct = 'hormone';
+            }
+        }
+
+        // --- 2. LOGIQUE SWITCH DE THÈME "WAVE" ---
+        let isAnimating = false;
+
+        function triggerWaveTransition(gender) {
+            const currentTheme = document.body.classList.contains('theme-man') ? 'man' : 'girl';
+            if (gender === currentTheme || isAnimating) return; // Ne rien faire si déjà sur ce thème
+
+            isAnimating = true;
+            const waveOverlay = document.getElementById('wave-overlay');
+            const data = themeData[gender];
+
+            // 1. Définir la couleur de la vague du futur thème
+            waveOverlay.style.color = data.waveColor;
+
+            // 2. Déterminer le sens du slide (Man -> Girl: Droite vers Gauche | Girl -> Man: Gauche vers Droite)
+            const slideInFrom = gender === 'girl' ? { left: '-100%' } : { left: '100%' };
+            const slideInTo = { left: '0%' };
+            const slideOutTo = gender === 'girl' ? { left: '100%' } : { left: '-100%' };
+
+            // Reset position avant l'animation
+            gsap.set(waveOverlay, slideInFrom);
+
+            const tl = gsap.timeline({
+                onComplete: () => { isAnimating = false; }
+            });
+
+            // A. Slide IN de la vague
+            tl.to(waveOverlay, {
+                ...slideInTo,
+                duration: 0.7,
+                ease: "power2.in",
+                onComplete: () => {
+                    // --- SWITCH DU CONTENU (À MI-CHEMIN, SOUS LA VAGUE) ---
+                    updateDOMContent(gender, data);
+                }
+            });
+
+            // B. Slide OUT de la vague
+            tl.to(waveOverlay, {
+                ...slideOutTo,
+                duration: 0.7,
+                ease: "power2.out",
+                delay: 0.1 // Petit temps d'arrêt pour l'effet
+            });
+        }
+
+        // Fonction pour mettre à jour tout le contenu textuel et images
+        function updateDOMContent(gender, data) {
+            // 1. Classe du Body (Couleurs de fond/texte)
+            document.body.className = `theme-${gender}`;
+
+            // 2. Titre Hero
+            document.getElementById('hero-title').innerText = data.heroTitle;
+
+            // 3. Images Produits
+            document.getElementById('img-hormone').src = data.imgHormone;
+            document.getElementById('img-libido').src = data.imgLibido;
+
+            // 4. Section Bénéfices (Icones + Textes)
+            const benefitItems = document.querySelectorAll('.benefit-item');
+            data.benefits.forEach((ben, index) => {
+                const item = benefitItems[index];
+                if(item) {
+                    item.querySelector('.text-5xl').innerText = ben.icon;
+                    item.querySelector('.data-title').innerText = ben.title;
+                    item.querySelector('.data-desc').innerText = ben.desc;
+                }
+            });
+
+            // 5. Section Guide (3 steps)
+            const guideItems = document.getElementById('guide-section').querySelectorAll('.relative.z-10');
+            data.guide.forEach((step, index) => {
+                const item = guideItems[index];
+                if(item) {
+                    item.querySelector('.guide-title').innerText = step.title;
+                    item.querySelector('.guide-text').innerText = step.desc;
+                }
+            });
+            
+            // Remettre Hormone devant par défaut lors du switch de thème
+            rotateProduct('hormone');
+        }
+
+        // --- 3. LOGIQUE ÉTOILES AVIS ---
+        function setRating(rating) {
+            const stars = document.querySelectorAll('.rating-stars .star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('text-gray-200');
+                    star.classList.add('text-amber-400');
+                } else {
+                    star.classList.remove('text-amber-400');
+                    star.classList.add('text-gray-200');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
