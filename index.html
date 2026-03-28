@@ -118,13 +118,13 @@
             transform: scale(1.1);
         }
 
-        .that-footer { padding: 60px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; color: #000000; }
-        .footer-logo { letter-spacing: 10px; font-size: 18px; margin-bottom: 30px; }
+        .that-footer { padding: 60px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; background-color: #000000; color: #ffffff; }
+        .footer-logo { letter-spacing: 10px; font-size: 18px; margin-bottom: 30px; color: #ffffff; }
         .footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 40px; flex-wrap: wrap; }
-        .footer-links a { text-decoration: none; color: inherit; font-size: 11px; letter-spacing: 2px; opacity: 0.7; transition: 0.3s; }
+        .footer-links a { text-decoration: none; color: #ffffff; font-size: 11px; letter-spacing: 2px; opacity: 0.8; transition: 0.3s; }
         .footer-links a:hover { opacity: 1; }
-        .fda-disclaimer { max-width: 600px; margin: 0 auto 30px; font-size: 10px; line-height: 1.6; opacity: 0.6; font-style: italic; }
-        .copyright { font-size: 9px; letter-spacing: 1px; opacity: 0.5; }
+        .fda-disclaimer { max-width: 600px; margin: 0 auto 30px; font-size: 10px; line-height: 1.6; opacity: 0.5; font-style: italic; color: #ffffff; }
+        .copyright { font-size: 9px; letter-spacing: 1px; opacity: 0.4; color: #ffffff; }
 
         @media (max-width: 768px) { 
             .usage-grid { flex-direction: column; } 
@@ -167,7 +167,7 @@
                         <div id="man-hormone" class="product-card absolute z-20 w-72">
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F0611b1d2e8ca3751411f84770451ba858734f6f1-2048x2048.jpg&w=768&q=85" class="drop-shadow-2xl">
                         </div>
-                        <div id="man-libido" class="product-card absolute z-10 w-64 translate-x-24 opacity-40 grayscale">
+                        <div id="man-libido" class="product-card absolute z-10 w-64 translate-x-24 opacity-40">
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F21369a6db2177d05ec076f4b35ca8b15407cd572-2048x2048.jpg&w=768&q=85" class="drop-shadow-xl">
                         </div>
                     </div>
@@ -259,7 +259,7 @@
                         <div id="girl-hormone" class="product-card absolute z-20 w-72">
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2Fc13b71d743c6b5e41dfd77c420f99bfa749175f2-2048x2048.jpg&w=768&q=85" class="drop-shadow-2xl">
                         </div>
-                        <div id="girl-libido" class="product-card absolute z-10 w-64 translate-x-24 opacity-40 grayscale">
+                        <div id="girl-libido" class="product-card absolute z-10 w-64 translate-x-24 opacity-40">
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F16755a58bb21e33f0c331fe57cf6b9f8f5c87807-2048x2048.jpg&w=768&q=85" class="drop-shadow-xl">
                         </div>
                     </div>
@@ -400,7 +400,6 @@
                 ease: "power2.inOut",
                 onUpdate: () => {
                     const p = waveData.p;
-                    // Calcule la vague basée sur la progression p
                     const offset = Math.sin(p * 0.1) * 5; 
                     const path = `polygon(${p + offset}% 0%, 100% 0%, 100% 100%, ${p - offset}% 100%)`;
                     girlLayer.style.clipPath = path;
@@ -424,13 +423,13 @@
             const themeColor = isMan ? '#3F88FE' : '#FFB3C1';
 
             if (product === 'libido') {
-                gsap.to(l, { x: 0, scale: 1.1, opacity: 1, zIndex: 30, grayscale: 0, duration: 0.8 });
-                gsap.to(h, { x: 100, scale: 0.8, opacity: 0.4, zIndex: 10, grayscale: 1, duration: 0.8 });
+                gsap.to(l, { x: 0, scale: 1.1, opacity: 1, zIndex: 30, duration: 0.8 });
+                gsap.to(h, { x: 100, scale: 0.8, opacity: 0.4, zIndex: 10, duration: 0.8 });
                 btnL.style.opacity = "1"; btnL.style.borderBottom = `2px solid ${themeColor}`;
                 btnH.style.opacity = "0.3"; btnH.style.borderBottom = "2px solid transparent";
             } else {
-                gsap.to(h, { x: 0, scale: 1.1, opacity: 1, zIndex: 30, grayscale: 0, duration: 0.8 });
-                gsap.to(l, { x: 100, scale: 0.8, opacity: 0.4, zIndex: 10, grayscale: 1, duration: 0.8 });
+                gsap.to(h, { x: 0, scale: 1.1, opacity: 1, zIndex: 30, duration: 0.8 });
+                gsap.to(l, { x: 100, scale: 0.8, opacity: 0.4, zIndex: 10, duration: 0.8 });
                 btnH.style.opacity = "1"; btnH.style.borderBottom = `2px solid ${themeColor}`;
                 btnL.style.opacity = "0.3"; btnL.style.borderBottom = "2px solid transparent";
             }
