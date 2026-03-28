@@ -31,8 +31,8 @@
         .pink-brand { color: #F4C2C2; }
 
         /* --- 3D PRODUCT VIEW --- */
-        /* Large container blanc pour les produits */
-        .product-stage-container { background: white; border-radius: 40px; padding: 40px 0; margin-bottom: 40px; }
+        /* Large container blanc englobant produits + boutons */
+        .product-stage-container { background: white; border-radius: 40px; padding: 40px 0 20px 0; margin-bottom: 40px; }
         .product-stage { perspective: 1200px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; }
         .product-card { transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s; }
         .product-card img { max-height: 400px; width: auto; }
@@ -45,9 +45,10 @@
         /* --- INTEGRATION STYLES NOUVELLES SECTIONS --- */
         .usage-section { padding: 80px 20px; text-align: center; }
         .section-title { font-family: 'Questrial', sans-serif; letter-spacing: 8px; margin-bottom: 50px; }
-        .usage-grid { display: flex; gap: 20px; max-width: 900px; margin: 0 auto; justify-content: center; }
+        /* Elargissement pour éviter l'aspect écrasé */
+        .usage-grid { display: flex; gap: 30px; max-width: 1100px; margin: 0 auto; justify-content: center; }
         .usage-card { 
-            padding: 30px; 
+            padding: 40px 30px; 
             border-radius: 20px; 
             flex: 1; 
             background: rgba(255,255,255,0.1);
@@ -59,11 +60,11 @@
         .usage-card h4 { font-family: 'Questrial', sans-serif; letter-spacing: 2px; margin-bottom: 15px; }
         .usage-card p { font-size: 14px; line-height: 1.6; opacity: 0.8; }
 
-        /* Bande à fond blanc pour les icones */
-        .trust-section { padding: 40px 20px; width: 100%; background: white; margin: 60px 0; }
-        .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 800px; margin: 0 auto; }
+        /* Bande à fond blanc full-width traversant tout l'écran */
+        .trust-section { padding: 50px 0; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background: white; margin-top: 60px; margin-bottom: 60px; }
+        .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
         .trust-item { display: flex; flex-direction: column; align-items: center; gap: 10px; color: #333; }
-        .trust-icon { font-size: 24px; }
+        .trust-icon { font-size: 32px; }
         .trust-text { font-family: 'Questrial', sans-serif; font-size: 10px; letter-spacing: 2px; font-weight: bold; text-align: center; }
 
         .that-footer { padding: 100px 20px 40px; text-align: center; font-family: 'Questrial', sans-serif; border-top: 1px solid rgba(255, 255, 255, 0.1); }
@@ -75,8 +76,7 @@
         .fda-disclaimer { max-width: 600px; margin: 0 auto 30px; font-size: 10px; line-height: 1.6; opacity: 0.4; font-style: italic; }
         .copyright { font-size: 9px; letter-spacing: 1px; opacity: 0.3; }
 
-        @media (max-width: 768px) { .usage-grid { flex-direction: column; } }
-        @media (max-width: 600px) { .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; } }
+        @media (max-width: 768px) { .usage-grid { flex-direction: column; } .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; } }
     </style>
 </head>
 <body>
@@ -95,7 +95,7 @@
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT MAN</h2>
                 
-                <div class="product-stage-container">
+                <div class="product-stage-container text-[#002366]">
                     <div class="product-stage">
                         <div id="man-hormone" class="product-card absolute z-20 w-72">
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F0611b1d2e8ca3751411f84770451ba858734f6f1-2048x2048.jpg&w=768&q=85" class="drop-shadow-2xl">
@@ -104,11 +104,10 @@
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F21369a6db2177d05ec076f4b35ca8b15407cd572-2048x2048.jpg&w=768&q=85" class="drop-shadow-xl">
                         </div>
                     </div>
-                </div>
-
-                <div class="flex justify-center gap-8 mb-16 text-xs uppercase font-bold">
-                    <button onclick="rotate('man', 'hormone')" id="m-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
-                    <button onclick="rotate('man', 'libido')" id="m-btn-l" class="opacity-30 pb-1">Libido</button>
+                    <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold">
+                        <button onclick="rotate('man', 'hormone')" id="m-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
+                        <button onclick="rotate('man', 'libido')" id="m-btn-l" class="opacity-30 pb-1">Libido</button>
+                    </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-4 mb-10">
@@ -179,7 +178,7 @@
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT GIRL</h2>
                 
-                <div class="product-stage-container">
+                <div class="product-stage-container text-[#4d3333]">
                     <div class="product-stage">
                         <div id="girl-hormone" class="product-card absolute z-20 w-72">
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2Fc13b71d743c6b5e41dfd77c420f99bfa749175f2-2048x2048.jpg&w=768&q=85" class="drop-shadow-2xl">
@@ -188,11 +187,10 @@
                             <img src="https://supliful.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fg0smbdlu%2Fproduction%2F16755a58bb21e33f0c331fe57cf6b9f8f5c87807-2048x2048.jpg&w=768&q=85" class="drop-shadow-xl">
                         </div>
                     </div>
-                </div>
-
-                <div class="flex justify-center gap-8 mb-16 text-xs uppercase font-bold">
-                    <button onclick="rotate('girl', 'hormone')" id="g-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
-                    <button onclick="rotate('girl', 'libido')" id="g-btn-l" class="opacity-30 pb-1">Libido</button>
+                    <div class="flex justify-center gap-8 mb-4 text-xs uppercase font-bold">
+                        <button onclick="rotate('girl', 'hormone')" id="g-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
+                        <button onclick="rotate('girl', 'libido')" id="g-btn-l" class="opacity-30 pb-1">Libido</button>
+                    </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-4 mb-10">
