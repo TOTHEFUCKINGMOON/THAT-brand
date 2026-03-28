@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THAT | The Dual Protocol</title>
+    <title>THAT | The Dual Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -11,159 +11,132 @@
     <style>
         body, html { margin: 0; padding: 0; font-family: 'Questrial', sans-serif; overflow-x: hidden; background: #f0f4f8; }
         
-        /* --- ARCHITECTURE DUAL LAYER --- */
-        .viewport { position: relative; width: 100vw; height: 100vh; overflow-y: auto; overflow-x: hidden; }
+        /* --- STRUCTURE DOUBLE COUCHE --- */
+        .site-container { position: relative; width: 100vw; height: 100vh; overflow-y: auto; overflow-x: hidden; }
         
-        /* Layer MAN (Fond) */
-        .site-layer.man { background-color: #f0f4f8; color: #002366; z-index: 1; position: relative; }
+        /* La couche de base (MAN) */
+        .layer-man { background-color: #f0f4f8; color: #002366; z-index: 1; }
         
-        /* Layer GIRL (Overlay) */
-        .site-layer.girl { 
-            position: absolute; top: 0; left: 0; width: 100%; min-height: 100%;
+        /* La couche supérieure (GIRL) */
+        .layer-girl { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #fff5f5; color: #4d3333; z-index: 2;
-            /* Effet de découpe Vague */
-            clip-path: url(#wave-mask);
-            pointer-events: none; /* Désactivé tant que non visible */
+            /* Le secret : clip-path crée la séparation */
+            clip-path: inset(0 0 0 100%); 
+            pointer-events: none; /* Désactivé par défaut quand caché */
         }
-        .site-layer.girl.active { pointer-events: auto; }
+        .layer-girl.active-nav { pointer-events: auto; }
 
-        /* --- 3D STAGE --- */
-        .product-stage { perspective: 1200px; height: 500px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .product-card { transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s; will-change: transform, opacity; }
-        
-        .btn-select { transition: all 0.3s ease; opacity: 0.3; border-bottom: 2px solid transparent; }
-        .btn-select.active { opacity: 1; border-color: currentColor; font-weight: bold; }
+        /* --- THEME COLORS --- */
+        .blue-brand { color: #002366; }
+        .pink-brand { color: #F4C2C2; }
+        .bg-blue { background-color: #002366; }
+        .bg-pink { background-color: #F4C2C2; }
 
-        /* Fixe le Header au dessus des deux couches */
-        header { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+        /* --- 3D PRODUCT VIEW --- */
+        .product-stage { perspective: 1200px; height: 450px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .product-card { transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.5s; }
         
-        /* SVG Hidden Mask Definition */
-        .svg-mask-def { position: absolute; width: 0; height: 0; }
+        /* Header Fixe pour les deux couches */
+        header { position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(255,255,255,0.01); backdrop-filter: blur(5px); }
+        
+        .btn-nav { cursor: pointer; transition: opacity 0.3s; font-weight: bold; letter-spacing: 0.1em; }
+        .star { cursor: pointer; transition: color 0.2s; }
     </style>
 </head>
 <body>
 
-    <svg class="svg-mask-def">
-        <defs>
-            <clipPath id="wave-mask" clipPathUnits="objectBoundingBox">
-                <path id="wave-path" d="M 1,0 L 1,0 L 1,1 L 1,1 Z" />
-            </clipPath>
-        </defs>
-    </svg>
-
-    <header class="py-6 text-center border-b border-gray-200/20">
+    <header class="py-6 text-center border-b border-gray-100/20">
         <h1 class="text-5xl font-bold tracking-tighter mb-4">THAT</h1>
-        <nav class="flex justify-center gap-10 text-[11px] uppercase tracking-widest font-bold">
-            <button onclick="switchContext('man')" class="hover:opacity-60 transition">THAT MAN</button>
-            <button onclick="switchContext('girl')" class="hover:opacity-60 transition">THAT GIRL</button>
+        <nav class="flex justify-center gap-10 text-[10px] uppercase">
+            <button onclick="revealLayer('man')" class="btn-nav">THAT MAN</button>
+            <button onclick="revealLayer('girl')" class="btn-nav">THAT GIRL</button>
         </nav>
     </header>
 
-    <div class="viewport">
+    <div class="site-container">
         
-        <section class="site-layer man pt-32 pb-20 px-6">
+        <section class="layer-man min-h-screen pt-32 pb-20 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-[120px] md:text-[180px] font-black opacity-5 text-center leading-none mb-10 select-none">THAT MAN</h2>
+                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT MAN</h2>
                 
                 <div class="product-stage mb-10">
-                    <div id="man-h" class="product-card absolute z-20 w-64 md:w-72"><img src="https://i.imgur.com/8Y4N8y6.png" class="drop-shadow-2xl"></div>
-                    <div id="man-l" class="product-card absolute z-10 w-56 md:w-64 translate-x-24 opacity-40 grayscale"><img src="https://i.imgur.com/M6X8gI1.png" class="drop-shadow-xl"></div>
+                    <div id="man-hormone" class="product-card absolute z-20 w-64"><img src="hormone-man.png" class="drop-shadow-2xl"></div>
+                    <div id="man-libido" class="product-card absolute z-10 w-56 translate-x-24 opacity-40 grayscale"><img src="libido-man.png" class="drop-shadow-xl"></div>
                 </div>
 
-                <div class="flex justify-center gap-12 mb-20 text-xs uppercase font-bold">
-                    <button onclick="rotate('man','hormone')" id="btn-man-h" class="btn-select active">Hormones</button>
-                    <button onclick="rotate('man','libido')" id="btn-man-l" class="btn-select">Libido</button>
+                <div class="flex justify-center gap-8 mb-16 text-xs uppercase font-bold">
+                    <button onclick="rotate('man', 'hormone')" id="m-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
+                    <button onclick="rotate('man', 'libido')" id="m-btn-l" class="opacity-30 pb-1">Libido</button>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6 mb-10">
-                    <div class="bg-white p-8 rounded-3xl border border-gray-100 flex items-center gap-6 cursor-pointer hover:border-[#002366] transition">
-                        <span class="text-4xl">📦📦</span>
-                        <div><h3 class="font-bold">Alpha Duo</h3><p class="text-sm opacity-50">Save 20% • One-time</p></div>
+                <div class="grid md:grid-cols-2 gap-4 mb-10">
+                    <div class="bg-white p-8 rounded-3xl border border-blue-100 flex items-center gap-4">
+                        <span class="text-3xl">📦</span>
+                        <div><p class="font-bold">Alpha Bundle</p><p class="text-xs opacity-50">Save 20% on the duo</p></div>
                     </div>
-                    <div class="bg-[#002366] text-white p-8 rounded-3xl flex items-center gap-6 cursor-pointer hover:scale-105 transition">
-                        <span class="text-4xl">🔄</span>
-                        <div><h3 class="font-bold">Monthly Protocol</h3><p class="text-sm opacity-70">Save 30% • Auto-ship</p></div>
-                    </div>
-                </div>
-                <button class="w-full bg-[#002366] text-white py-6 rounded-full font-bold text-2xl mb-20 shadow-xl">START PROTOCOL — $49</button>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-t border-gray-200">
-                    <div class="text-center"><div class="text-4xl mb-3">⚡️</div><h4 class="font-bold text-sm uppercase">Energy</h4><p class="text-[10px] opacity-60">Sustained power.</p></div>
-                    <div class="text-center"><div class="text-4xl mb-3">🧠</div><h4 class="font-bold text-sm uppercase">Focus</h4><p class="text-[10px] opacity-60">Sharp mind.</p></div>
-                    <div class="text-center"><div class="text-4xl mb-3">💪</div><h4 class="font-bold text-sm uppercase">Drive</h4><p class="text-[10px] opacity-60">No limits.</p></div>
-                    <div class="text-center"><div class="text-4xl mb-3">🌙</div><h4 class="font-bold text-sm uppercase">Recovery</h4><p class="text-[10px] opacity-60">Deep sleep.</p></div>
-                </div>
-
-                <div class="py-20 border-t border-gray-200">
-                    <h3 class="text-center text-3xl font-bold mb-16 uppercase italic">The 3-Step Protocol</h3>
-                    <div class="grid md:grid-cols-3 gap-12 text-center">
-                        <div><span class="w-12 h-12 rounded-full bg-[#002366] text-white inline-flex items-center justify-center font-bold mb-4">1</span><p class="text-sm">2 Capsules morning.</p></div>
-                        <div><span class="w-12 h-12 rounded-full bg-[#002366] text-white inline-flex items-center justify-center font-bold mb-4">2</span><p class="text-sm">Stay hydrated.</p></div>
-                        <div><span class="w-12 h-12 rounded-full bg-[#002366] text-white inline-flex items-center justify-center font-bold mb-4">3</span><p class="text-sm">Feel the shift in 14 days.</p></div>
+                    <div class="bg-blue-900 text-white p-8 rounded-3xl flex items-center gap-4">
+                        <span class="text-3xl">🔄</span>
+                        <div><p class="font-bold">Monthly Protocol</p><p class="text-xs opacity-60">Save 30% • Auto-ship</p></div>
                     </div>
                 </div>
+                <button class="w-full bg-[#002366] text-white py-6 rounded-full font-bold text-xl mb-20">GET STARTED — $49</button>
 
-                <div class="py-24 border-t border-gray-200 text-center">
-                    <h3 class="text-2xl font-bold mb-2">Help us improve.</h3>
-                    <p class="text-gray-400 italic mb-10">"Don't worry, we won't publish it, so give us no quarter!"</p>
-                    <div class="flex flex-wrap justify-center gap-4 bg-white p-6 rounded-3xl shadow-sm">
-                        <div class="text-2xl text-gray-200 flex gap-1 cursor-pointer"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                        <input type="text" placeholder="Your thoughts..." class="bg-gray-50 px-6 py-3 rounded-full text-sm outline-none w-64">
-                        <button class="bg-[#002366] text-white px-10 py-3 rounded-full font-bold text-sm">SEND</button>
+                <div class="grid grid-cols-3 gap-6 text-center border-t py-12 border-blue-200/30">
+                    <div><b class="text-2xl block mb-2">01</b><p class="text-[10px] uppercase font-bold">2 capsules / AM</p></div>
+                    <div><b class="text-2xl block mb-2">02</b><p class="text-[10px] uppercase font-bold">Consistent Flow</p></div>
+                    <div><b class="text-2xl block mb-2">03</b><p class="text-[10px] uppercase font-bold">Peak Performance</p></div>
+                </div>
+
+                <div class="text-center py-20 bg-white/50 rounded-[40px] px-4">
+                    <p class="italic text-gray-400 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
+                    <div class="flex flex-wrap justify-center gap-4 items-center">
+                        <div class="text-2xl flex gap-1 text-gray-200"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                        <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white">
+                        <button class="bg-[#002366] text-white px-8 py-3 rounded-xl font-bold">SEND</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="girl-layer" class="site-layer girl pt-32 pb-20 px-6">
+        <section id="girl-layer" class="layer-girl min-h-screen pt-32 pb-20 px-6">
             <div class="max-w-5xl mx-auto">
-                <h2 class="text-[120px] md:text-[180px] font-black opacity-10 text-center leading-none mb-10 select-none">THAT GIRL</h2>
+                <h2 class="text-[120px] font-black opacity-10 text-center leading-none mb-10">THAT GIRL</h2>
                 
                 <div class="product-stage mb-10">
-                    <div id="girl-h" class="product-card absolute z-20 w-64 md:w-72"><img src="https://i.imgur.com/7Yf9MdB.png" class="drop-shadow-2xl"></div>
-                    <div id="girl-l" class="product-card absolute z-10 w-56 md:w-64 translate-x-24 opacity-40 grayscale"><img src="https://i.imgur.com/N5M6H7V.png" class="drop-shadow-xl"></div>
+                    <div id="girl-hormone" class="product-card absolute z-20 w-64"><img src="hormone-girl.png" class="drop-shadow-2xl"></div>
+                    <div id="girl-libido" class="product-card absolute z-10 w-56 translate-x-24 opacity-40 grayscale"><img src="libido-girl.png" class="drop-shadow-xl"></div>
                 </div>
 
-                <div class="flex justify-center gap-12 mb-20 text-xs uppercase font-bold">
-                    <button onclick="rotate('girl','hormone')" id="btn-girl-h" class="btn-select active">Hormones</button>
-                    <button onclick="rotate('girl','libido')" id="btn-girl-l" class="btn-select">Libido</button>
+                <div class="flex justify-center gap-8 mb-16 text-xs uppercase font-bold">
+                    <button onclick="rotate('girl', 'hormone')" id="g-btn-h" class="border-b-2 border-current pb-1">Hormones</button>
+                    <button onclick="rotate('girl', 'libido')" id="g-btn-l" class="opacity-30 pb-1">Libido</button>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6 mb-10">
-                    <div class="bg-white p-8 rounded-3xl border border-pink-100 flex items-center gap-6 cursor-pointer hover:border-[#F4C2C2] transition">
-                        <span class="text-4xl">✨✨</span>
-                        <div><h3 class="font-bold">Glow Duo</h3><p class="text-sm opacity-50">Save 20% • One-time</p></div>
+                <div class="grid md:grid-cols-2 gap-4 mb-10">
+                    <div class="bg-white p-8 rounded-3xl border border-pink-100 flex items-center gap-4">
+                        <span class="text-3xl">✨</span>
+                        <div><p class="font-bold">Glow Bundle</p><p class="text-xs opacity-50">Save 20% on the duo</p></div>
                     </div>
-                    <div class="bg-[#F4C2C2] text-white p-8 rounded-3xl flex items-center gap-6 cursor-pointer hover:scale-105 transition">
-                        <span class="text-4xl">🔄</span>
-                        <div><h3 class="font-bold text-gray-800">Monthly Glow</h3><p class="text-sm text-gray-700">Save 30% • Auto-ship</p></div>
-                    </div>
-                </div>
-                <button class="w-full bg-[#F4C2C2] text-gray-800 py-6 rounded-full font-bold text-2xl mb-20 shadow-xl">START YOUR GLOW — $49</button>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-t border-pink-200">
-                    <div class="text-center"><div class="text-4xl mb-3">✨</div><h4 class="font-bold text-sm uppercase">Radiance</h4><p class="text-[10px] opacity-60">Natural glow.</p></div>
-                    <div class="text-center"><div class="text-4xl mb-3">⚖️</div><h4 class="font-bold text-sm uppercase">Balance</h4><p class="text-[10px] opacity-60">Hormonal flow.</p></div>
-                    <div class="text-center"><div class="text-4xl mb-3">🌸</div><h4 class="font-bold text-sm uppercase">Mood</h4><p class="text-[10px] opacity-60">Calm energy.</p></div>
-                    <div class="text-center"><div class="text-4xl mb-3">🍃</div><h4 class="font-bold text-sm uppercase">Vitality</h4><p class="text-[10px] opacity-60">Pure life.</p></div>
-                </div>
-
-                <div class="py-20 border-t border-pink-200">
-                    <h3 class="text-center text-3xl font-bold mb-16 uppercase italic">The Glow Protocol</h3>
-                    <div class="grid md:grid-cols-3 gap-12 text-center">
-                        <div><span class="w-12 h-12 rounded-full bg-[#F4C2C2] text-white inline-flex items-center justify-center font-bold mb-4">1</span><p class="text-sm">2 Capsules AM Ritual.</p></div>
-                        <div><span class="w-12 h-12 rounded-full bg-[#F4C2C2] text-white inline-flex items-center justify-center font-bold mb-4">2</span><p class="text-sm">Find your center.</p></div>
-                        <div><span class="w-12 h-12 rounded-full bg-[#F4C2C2] text-white inline-flex items-center justify-center font-bold mb-4">3</span><p class="text-sm">Visualize the glow in 3 weeks.</p></div>
+                    <div class="bg-[#F4C2C2] text-white p-8 rounded-3xl flex items-center gap-4">
+                        <span class="text-3xl">🔄</span>
+                        <div><p class="font-bold">Monthly Glow</p><p class="text-xs opacity-80 text-gray-700">Save 30% • Monthly</p></div>
                     </div>
                 </div>
+                <button class="w-full bg-[#F4C2C2] text-gray-800 py-6 rounded-full font-bold text-xl mb-20">START THE GLOW — $49</button>
 
-                <div class="py-24 border-t border-pink-200 text-center">
-                    <h3 class="text-2xl font-bold mb-2">Help us improve.</h3>
-                    <p class="text-gray-500 italic mb-10">"Don't worry, we won't publish it, so give us no quarter!"</p>
-                    <div class="flex flex-wrap justify-center gap-4 bg-white p-6 rounded-3xl shadow-sm">
-                        <div class="text-2xl text-gray-200 flex gap-1"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                        <input type="text" placeholder="Your thoughts..." class="bg-gray-50 px-6 py-3 rounded-full text-sm outline-none w-64">
-                        <button class="bg-[#F4C2C2] text-gray-800 px-10 py-3 rounded-full font-bold text-sm">SEND</button>
+                <div class="grid grid-cols-3 gap-6 text-center border-t py-12 border-pink-200">
+                    <div><b class="text-2xl block mb-2">01</b><p class="text-[10px] uppercase font-bold">Morning Ritual</p></div>
+                    <div><b class="text-2xl block mb-2">02</b><p class="text-[10px] uppercase font-bold">Balance Flow</p></div>
+                    <div><b class="text-2xl block mb-2">03</b><p class="text-[10px] uppercase font-bold">Total Radiance</p></div>
+                </div>
+
+                <div class="text-center py-20 bg-white/50 rounded-[40px] px-4">
+                    <p class="italic text-gray-500 mb-6">"Help us improve. Don't worry, we won't publish it, so give us no quarter!"</p>
+                    <div class="flex flex-wrap justify-center gap-4 items-center">
+                        <div class="text-2xl flex gap-1 text-gray-200"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                        <input type="text" placeholder="Your thoughts..." class="p-3 rounded-xl border-none text-sm w-64 bg-white">
+                        <button class="bg-[#F4C2C2] text-gray-800 px-8 py-3 rounded-xl font-bold">SEND</button>
                     </div>
                 </div>
             </div>
@@ -172,46 +145,47 @@
     </div>
 
     <script>
-        // --- LOGIQUE DU SLIDER VAGUE (Clip-Path) ---
-        function switchContext(target) {
+        // --- LOGIQUE DU SLIDER CLIP-PATH (EFFET VAGUE) ---
+        function revealLayer(target) {
             const girlLayer = document.getElementById('girl-layer');
-            const wavePath = document.getElementById('wave-path');
-
+            
             if (target === 'girl') {
-                // On glisse la vague de DROITE à GAUCHE pour découvrir le site GIRL
-                // On anime les points du Path SVG (format normalisé 0-1 pour objectBoundingBox)
-                gsap.to(wavePath, {
-                    attr: { d: "M 0,0 L 1,0 L 1,1 L 0,1 C 0.2,0.8 0.2,0.2 0,0" }, 
+                // On fait glisser le site GIRL par dessus (de droite à gauche)
+                gsap.to(girlLayer, {
+                    clipPath: "inset(0 0 0 0%)",
                     duration: 1.2,
                     ease: "power3.inOut"
                 });
-                girlLayer.classList.add('active');
+                girlLayer.classList.add('active-nav');
             } else {
-                // On glisse vers la DROITE pour masquer
-                gsap.to(wavePath, {
-                    attr: { d: "M 1,0 L 1,0 L 1,1 L 1,1 Z" },
+                // On retire le site GIRL vers la droite pour révéler le site MAN en dessous
+                gsap.to(girlLayer, {
+                    clipPath: "inset(0 0 0 100%)",
                     duration: 1.2,
                     ease: "power3.inOut"
                 });
-                girlLayer.classList.remove('active');
+                girlLayer.classList.remove('active-nav');
             }
         }
 
-        // --- LOGIQUE ROTATION PRODUITS 3D ---
+        // --- LOGIQUE ROTATION PRODUITS ---
         function rotate(gender, product) {
-            const h = document.getElementById(`${gender}-h`);
-            const l = document.getElementById(`${gender}-l`);
-            const btnH = document.getElementById(`btn-${gender}-h`);
-            const btnL = document.getElementById(`btn-${gender}-l`);
+            const isMan = (gender === 'man');
+            const h = document.getElementById(isMan ? 'man-hormone' : 'girl-hormone');
+            const l = document.getElementById(isMan ? 'man-libido' : 'girl-libido');
+            const btnH = document.getElementById(isMan ? 'm-btn-h' : 'g-btn-h');
+            const btnL = document.getElementById(isMan ? 'm-btn-l' : 'g-btn-l');
 
             if (product === 'libido') {
-                gsap.to(l, { x: 0, z: 0, opacity: 1, zIndex: 30, grayscale: 0, duration: 1, ease: "power4.out" });
-                gsap.to(h, { x: 120, z: -150, opacity: 0.4, zIndex: 10, grayscale: 1, duration: 1, ease: "power4.out" });
-                btnL.classList.add('active'); btnH.classList.remove('active');
+                gsap.to(l, { x: 0, scale: 1.1, opacity: 1, zIndex: 30, grayscale: 0, duration: 0.8 });
+                gsap.to(h, { x: 100, scale: 0.8, opacity: 0.4, zIndex: 10, grayscale: 1, duration: 0.8 });
+                btnL.style.opacity = "1"; btnL.style.borderBottom = "2px solid currentcolor";
+                btnH.style.opacity = "0.3"; btnH.style.borderBottom = "2px solid transparent";
             } else {
-                gsap.to(h, { x: 0, z: 0, opacity: 1, zIndex: 30, grayscale: 0, duration: 1, ease: "power4.out" });
-                gsap.to(l, { x: 120, z: -150, opacity: 0.4, zIndex: 10, grayscale: 1, duration: 1, ease: "power4.out" });
-                btnH.classList.add('active'); btnL.classList.remove('active');
+                gsap.to(h, { x: 0, scale: 1.1, opacity: 1, zIndex: 30, grayscale: 0, duration: 0.8 });
+                gsap.to(l, { x: 100, scale: 0.8, opacity: 0.4, zIndex: 10, grayscale: 1, duration: 0.8 });
+                btnH.style.opacity = "1"; btnH.style.borderBottom = "2px solid currentcolor";
+                btnL.style.opacity = "0.3"; btnL.style.borderBottom = "2px solid transparent";
             }
         }
     </script>
